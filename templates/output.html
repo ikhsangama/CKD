@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Deteksi Penyakit Ginjal Kronis</title>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</head>
+<body class="blue-grey lighten-5">
+<header>
+    <nav>
+        <div class="nav-wrapper blue darken-1">
+            <a href="/" class="brand-logo">Identifikasi Penyakit Ginjal Kronis</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="datamining_1.html">Data Mining</a></li>
+                <li><a href="identifikasi.html">Identifikasi Pasien</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+        <div class="card-panel">
+            <h2>Hasil Identifikasi</h2>
+            <h4>Prediksi kNN dengan atribut terbaik</h4>
+            <hr>
+
+            <h5>Nama: {{ nama }}</h5>
+            <div class="row">
+                <div class="col s4">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>Berat Jenis</td>
+                            <td>:</td>
+                            <td>{{ list[0] }} g/cm3</td>
+                        </tr>
+                        <tr>
+                            <td>Albumin</td>
+                            <td>:</td>
+                            <td>{{ list[1] }} mg/dl</td>
+                        </tr>
+                        <tr>
+                            <td>Urea Darah</td>
+                            <td>:</td>
+                            <td>{{ list[2] }} mg/dl</td>
+                        </tr>
+                        <tr>
+                            <td>Kreatinin Serum</td>
+                            <td>:</td>
+                            <td>{{ list[3] }} mg/dl</td>
+                        </tr>
+                        <tr>
+                            <td>Sodium</td>
+                            <td>:</td>
+                            <td>{{ list[4] }} mEq/L</td>
+                        </tr>
+                        <tr>
+                            <td>Hemoglobin</td>
+                            <td>:</td>
+                            <td>{{ list[5] }} gr</td>
+                        </tr>
+                        <tr>
+                            <td>Sel Darah Merah</td>
+                            <td>:</td>
+                            <td>{{ list[6] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Hipertensi</td>
+                            <td>:</td>
+                            <td>{{ list[7] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Diabetes Mellitus</td>
+                            <td>:</td>
+                            <td>{{ list[8] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nafsu Makan</td>
+                            <td>:</td>
+                            <td>{{ list[9] }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <h5>Hasil: {{ hasil }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="page-footer blue darken-1">
+    <div class="footer-copyright blue darken-2">
+        <div class="container">
+            © 2018 UNDIP
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

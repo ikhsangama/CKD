@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+{% include "header.html" %}
+
+
+<main>
+    <div class="container">
+        <div class="card-panel">
+            <div class="row">
+                <div class="col s8">
+                    <h2>Input Atribut</h2>
+                </div>
+
+                <div class="col s4">
+                    <div class="switch right-align valign-wrapper">
+                        <label>
+                            Semua Atribut
+                            <input id="filter" type="checkbox">
+                            <span class="lever"></span>
+                            Atribut Terbaik
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <form action="http://127.0.0.1:5000/demo_1send" method="POST">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="nama" type="text" class="validate" name="nama">
+                        <label for="nama">Nama</label>
+                    </div>
+                    {#                    1#}
+                    <div class="input-field col s6 filtered">
+                        <input id="age" type="number" class="validate" name="age">
+                        <label for="age">Umur</label>
+                    </div>
+                    {#                    2#}
+                    <div class="input-field col s6 filtered">
+                        <input id="bp" type="number" class="validate" name="bp">
+                        <label for="bp">Tekanan Darah</label>
+                    </div>
+                    {#                    3#}
+                    <div class="input-field col s6">
+                        <input id="sg" type="number" class="validate" name="sg">
+                        <label for="sg">Berat Jenis</label>
+                    </div>
+                    {#                    4#}
+                    <div class="input-field col s6">
+                        <input id="al" type="number" class="validate" name="al">
+                        <label for="al">Albumin</label>
+                    </div>
+                    {#                    5#}
+                    <div class="input-field col s6 filtered">
+                        <input id="su" type="number" class="validate" name="su">
+                        <label for="su">Gula</label>
+                    </div>
+                    {#                    6#}
+                    <div class="input-field col s6 filtered">
+                        <input id="bgr" type="number" class="validate" name="bgr">
+                        <label for="bgr">Gula Darah Acak</label>
+                    </div>
+                    {#                    7#}
+                    <div class="input-field col s6">
+                        <input id="bu" type="number" class="validate" name="bu">
+                        <label for="bu">Urea Darah</label>
+                    </div>
+                    {#                    8#}
+                    <div class="input-field col s6">
+                        <input id="sc" type="number" class="validate" name="sc">
+                        <label for="sc">Serum Kreatinin</label>
+                    </div>
+                    {#                    9#}
+                    <div class="input-field col s6">
+                        <input id="sod" type="number" class="validate" name="sod">
+                        <label for="sod">Sodium</label>
+                    </div>
+                    {#                    10#}
+                    <div class="input-field col s6 filtered">
+                        <input id="pot" type="number" class="validate" name="pot">
+                        <label for="pot">Potasium</label>
+                    </div>
+                    {#                    11#}
+                    <div class="input-field col s6">
+                        <input id="hemo" type="number" class="validate" name="hemo">
+                        <label for="hemo">Hemoglobin</label>
+                    </div>
+                    {#                    12#}
+                    <div class="input-field col s6 filtered">
+                        <input id="pcv" type="number" class="validate" name="pcv">
+                        <label for="pcv">Hematokrit</label>
+                    </div>
+                    {#                    13#}
+                    <div class="input-field col s6 filtered">
+                        <input id="wbcc" type="number" class="validate" name="wbcc">
+                        <label for="wbcc">Jumlah Sel Darah Putih</label>
+                    </div>
+                    {#                    14#}
+                    <div class="input-field col s6 filtered">
+                        <input id="rbcc" type="number" class="validate" name="rbcc">
+                        <label for="rbcc">Jumlah Sel Darah Merah</label>
+                    </div>
+                    {#                    15#}
+                    <div class="input-field col s6">
+                        <select name="rbc">
+                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="normal">Normal</option>
+                            <option value="abnormal">Abnormal</option>
+                        </select>
+                        <label>Sel Darah Merah</label>
+                    </div>
+                    {#                    16#}
+                    <div class="input-field col s6 filtered">
+                        <select name="pc">
+                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="normal">Normal</option>
+                            <option value="abnormal">Abnormal</option>
+                        </select>
+                        <label>Sel Darah Putih</label>
+                    </div>
+                    {#                    17#}
+                    <div class="input-field col s6 filtered">
+                        <select name="pcc">
+                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="present">Ada</option>
+                            <option value="notpresent">Tidak Ada</option>
+                        </select>
+                        <label>Gumpalan Sel Nanah</label>
+                    </div>
+                    {#                    18#}
+                    <div class="input-field col s6 filtered">
+                        <select name="ba">
+                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="present">Ada</option>
+                            <option value="notpresent">Tidak Ada</option>
+                        </select>
+                        <label>Bakteri</label>
+                    </div>
+                    {#                    19#}
+                    <div class="input-field col s6">
+                        <select name="htn">
+                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="yes">Ya</option>
+                            <option value="no">Tidak</option>
+                        </select>
+                        <label>Hipertensi</label>
+                    </div>
+                    {#                    20#}
+                    <div class="input-field col s6">
+                        <select name="dm">
+                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="normal">Ya</option>
+                            <option value="abnormal">Tidak</option>
+                        </select>
+                        <label>Diabetes Melitus</label>
+                    </div>
+                    {#                    21#}
+                    <div class="input-field col s6 filtered">
+                        <select name="cad">
+                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="yes">Ya</option>
+                            <option value="no">Tidak</option>
+                        </select>
+                        <label>Penyakit Jantung Koroner</label>
+                    </div>
+                    {#                    22#}
+                    <div class="input-field col s6">
+                        <select name="appet">
+                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="good">Baik</option>
+                            <option value="poor">Buruk</option>
+                        </select>
+                        <label>Nafsu Makan</label>
+                    </div>
+                    {#                    23#}
+                    <div class="input-field col s6 filtered">
+                        <select name="pe">
+                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="yes">Ya</option>
+                            <option value="no">Tidak</option>
+                        </select>
+                        <label>Pembengkakan Kaki</label>
+                    </div>
+                    {#                    24#}
+                    <div class="input-field col s6 filtered">
+                        <select name="ane">
+                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="normal">Ya</option>
+                            <option value="abnormal">Tidak</option>
+                        </select>
+                        <label>Anemia</label>
+                    </div>
+                    <input name="terbaik" class="filtered" type="checkbox" value="On" hidden/>
+
+                    <br>
+
+                    <input class="btn btn-primary" type="submit" value="submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#filter').click(function () {
+            $("div.filtered").toggle(!this.checked);
+            $("input.filtered").prop('checked', this.checked);
+        });
+    });
+
+</script>
+{% include "footer.html" %}
+</html>

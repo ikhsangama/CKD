@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+{% include "header.html" %}
+
+<main>
+    <div class="container">
+        <div class="card-panel">
+            <h2>4. Transformasi Data</h2>
+            <hr>
+            <h4>4.1 Data Nominal Menjadi Numerik</h4>
+            <blockquote>
+                <p>Mengubah atribut / kolom polinom menjadi numerik</p>
+                <p>Dikarenakan semua kolom nominal hanya memiliki 2 kelas (binary), hasil transformasi menjadi 0 dan 1</p>
+            </blockquote>
+            {{ encoded_df.head().to_html(classes="responsive-table striped") | safe}}
+            <br>
+
+            <h4>4.2 Penanganan Data yang Hilang</h4>
+            <blockquote>
+                <p>Mengubah NaN menjadi strategi tertentu, dalam hal ini diubah menjadi rata - rata dari setiap kolom</p>
+            </blockquote>
+            {{ missing_handling_df.head().to_html(classes="responsive-table striped") | safe }}
+            <hr>
+            <a href="datamining_3.html" class="waves-effect waves-light btn "><i class="material-icons left">navigate_before</i>Tahap 2</a>
+{#            <a href="datamining_5.html" class="waves-effect waves-light btn right"><i class="material-icons right">navigate_next</i>Tahap 5</a>#}
+        </div>
+    </div>
+</main>
+
+{% include "footer.html" %}
+</html>
