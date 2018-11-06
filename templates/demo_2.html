@@ -3,129 +3,37 @@
 
 {% include "header.html" %}
 
-
 <main>
     <div class="container">
         <div class="card-panel">
             <div class="row">
-                <div class="col s8">
-                    <h2>
-                        Tahap 2
-                    </h2>
-                    {#                    {{ h.head().to_html(classes="responsive-table striped", table_id="example") | safe }}#}
+                <div class="col s12">
+                    <h3>
+                        Pembersihan Outlier
+                    </h3>
+                    <div class="col s12">
+                        <h4>Input</h4>
+                    </div>
+                    <div class="col s12" style="overflow-x: scroll;">
+                        {{ new_point.to_html(index=False , classes="responsive-table") | safe }}
+                    </div>
                     <hr>
-                    <h4>Input</h4>
-                    <table class="responsive-table" , table_id="" example>
-                        <thead>
-                        {#                        ['sg', 'al', 'bu', 'sc', 'sod', 'hemo', 'rbc', 'htn', 'dm', 'appet']#}
-                        <tr>
-                            {% if terbaik==True %}
-                                <th>sg</th>
-                                <th>al</th>
-                                <th>bu</th>
-                                <th>sc</th>
-                                <th>sod</th>
-                                <th>hemo</th>
-                                <th>rbc</th>
-                                <th>htn</th>
-                                <th>dm</th>
-                                <th>appet</th>
-                            {% else %}
-                                <th>age</th>
-                                <th>bp</th>
-                                <th>sg</th>
-                                <th>al</th>
-                                <th>su</th>
-                                <th>bgr</th>
-                                <th>bu</th>
-                                <th>sc</th>
-                                <th>sod</th>
-                                <th>pot</th>
-                                <th>hemo</th>
-                                <th>pcv</th>
-                                <th>wbcc</th>
-                                <th>rbcc</th>
-                                <th>rbc</th>
-                                <th>pc</th>
-                                <th>pcc</th>
-                                <th>ba</th>
-                                <th>htn</th>
-                                <th>dm</th>
-                                <th>cad</th>
-                                <th>appet</th>
-                                <th>pe</th>
-                                <th>ane</th>
-                            {% endif %}
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            {% for data in new_point %}
-                                <td>{{ data }}</td>
-                            {% endfor %}
-                        </tr>
-                        </tbody>
-                    </table>
-                    <hr>
-
-                    <h4>Data</h4>
-                    <table class="responsive-table">
-                        <thead>
-                        {#                        ['sg', 'al', 'bu', 'sc', 'sod', 'hemo', 'rbc', 'htn', 'dm', 'appet']#}
-                        <tr>
-                            {% if terbaik==True %}
-                                <th>id</th>
-                                <th>sg</th>
-                                <th>al</th>
-                                <th>bu</th>
-                                <th>sc</th>
-                                <th>sod</th>
-                                <th>hemo</th>
-                                <th>rbc</th>
-                                <th>htn</th>
-                                <th>dm</th>
-                                <th>appet</th>
-                            {% else %}
-                                <th>id</th>
-                                <th>age</th>
-                                <th>bp</th>
-                                <th>sg</th>
-                                <th>al</th>
-                                <th>su</th>
-                                <th>bgr</th>
-                                <th>bu</th>
-                                <th>sc</th>
-                                <th>sod</th>
-                                <th>pot</th>
-                                <th>hemo</th>
-                                <th>pcv</th>
-                                <th>wbcc</th>
-                                <th>rbcc</th>
-                                <th>rbc</th>
-                                <th>pc</th>
-                                <th>pcc</th>
-                                <th>ba</th>
-                                <th>htn</th>
-                                <th>dm</th>
-                                <th>cad</th>
-                                <th>appet</th>
-                                <th>pe</th>
-                                <th>ane</th>
-                            {% endif %}
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for row in df %}
-                            <tr>
-                                {% for d in row %}
-                                    <td>{{ d }}</td>
-                                {% endfor %}
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                    <div class="col s12">
+                        <hr>
+                        <h4>Data {{ shape }}</h4>
+                    </div>
+                    <div class="col s12" style="overflow-x: scroll; overflow-y: auto; height: 35em">
+                        {{ df.to_html(index=False , classes="responsive-table") | safe }}
+                    </div>
                 </div>
             </div>
+
+            <a href="demo_3" class="btn btn-primary green">Transformasi Data</a>
         </div>
 
-        <input class="btn btn-prima
+    </div>
+</main>
+<hr>
+
+{% include "footer.html" %}
+</html>

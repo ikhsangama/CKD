@@ -3,7 +3,6 @@
 
 {% include "header.html" %}
 
-
 <main>
     <div class="container">
         <div class="card-panel">
@@ -26,28 +25,24 @@
 
             <form action="http://127.0.0.1:5000/demo_1send" method="POST">
                 <div class="row">
-                    <div class="input-field col s12">
-                        <input id="nama" type="text" class="validate" name="nama">
-                        <label for="nama">Nama</label>
-                    </div>
                     {#                    1#}
                     <div class="input-field col s6 filtered">
-                        <input id="age" type="number" class="validate" name="age">
+                        <input id="age" type="number" class="validate" name="age" min="11" max="90">
                         <label for="age">Umur</label>
                     </div>
                     {#                    2#}
                     <div class="input-field col s6 filtered">
-                        <input id="bp" type="number" class="validate" name="bp">
+                        <input id="bp" type="number" class="validate" name="bp" min="50" max="140">
                         <label for="bp">Tekanan Darah</label>
                     </div>
                     {#                    3#}
                     <div class="input-field col s6">
-                        <input id="sg" type="number" class="validate" name="sg">
+                        <input id="sg" type="number" class="validate best_atr" name="sg" step="0.005" min="1" max="1.025">
                         <label for="sg">Berat Jenis</label>
                     </div>
                     {#                    4#}
                     <div class="input-field col s6">
-                        <input id="al" type="number" class="validate" name="al">
+                        <input id="al" type="number" class="validate best_atr" name="al">
                         <label for="al">Albumin</label>
                     </div>
                     {#                    5#}
@@ -62,17 +57,17 @@
                     </div>
                     {#                    7#}
                     <div class="input-field col s6">
-                        <input id="bu" type="number" class="validate" name="bu">
+                        <input id="bu" type="number" class="validate best_atr" name="bu">
                         <label for="bu">Urea Darah</label>
                     </div>
                     {#                    8#}
                     <div class="input-field col s6">
-                        <input id="sc" type="number" class="validate" name="sc">
+                        <input id="sc" type="number" class="validate best_atr" name="sc" step="any">
                         <label for="sc">Serum Kreatinin</label>
                     </div>
                     {#                    9#}
                     <div class="input-field col s6">
-                        <input id="sod" type="number" class="validate" name="sod">
+                        <input id="sod" type="number" class="validate best_atr" name="sod">
                         <label for="sod">Sodium</label>
                     </div>
                     {#                    10#}
@@ -82,7 +77,7 @@
                     </div>
                     {#                    11#}
                     <div class="input-field col s6">
-                        <input id="hemo" type="number" class="validate" name="hemo">
+                        <input id="hemo" type="number" class="validate best_atr" name="hemo">
                         <label for="hemo">Hemoglobin</label>
                     </div>
                     {#                    12#}
@@ -102,8 +97,8 @@
                     </div>
                     {#                    15#}
                     <div class="input-field col s6">
-                        <select name="rbc">
-                            <option value="NaN" selected>Tidak Diketahui</option>
+                        <select name="rbc" class="validate best_atr">
+                            <option value="nan" disabled selected>Pilih</option>
                             <option value="normal">Normal</option>
                             <option value="abnormal">Abnormal</option>
                         </select>
@@ -112,7 +107,7 @@
                     {#                    16#}
                     <div class="input-field col s6 filtered">
                         <select name="pc">
-                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="nan" disabled selected>Pilih</option>
                             <option value="normal">Normal</option>
                             <option value="abnormal">Abnormal</option>
                         </select>
@@ -121,7 +116,7 @@
                     {#                    17#}
                     <div class="input-field col s6 filtered">
                         <select name="pcc">
-                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="" disabled selected>Pilih</option>
                             <option value="present">Ada</option>
                             <option value="notpresent">Tidak Ada</option>
                         </select>
@@ -130,7 +125,7 @@
                     {#                    18#}
                     <div class="input-field col s6 filtered">
                         <select name="ba">
-                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="" disabled selected>Pilih</option>
                             <option value="present">Ada</option>
                             <option value="notpresent">Tidak Ada</option>
                         </select>
@@ -138,8 +133,8 @@
                     </div>
                     {#                    19#}
                     <div class="input-field col s6">
-                        <select name="htn">
-                            <option value="NaN" selected>Tidak Diketahui</option>
+                        <select name="htn" class="validate best_atr">
+                            <option value="" disabled selected>Pilih</option>
                             <option value="yes">Ya</option>
                             <option value="no">Tidak</option>
                         </select>
@@ -147,17 +142,17 @@
                     </div>
                     {#                    20#}
                     <div class="input-field col s6">
-                        <select name="dm">
-                            <option value="NaN" selected>Tidak Diketahui</option>
-                            <option value="normal">Ya</option>
-                            <option value="abnormal">Tidak</option>
+                        <select name="dm" class="validate best_atr">
+                            <option value="" disabled selected>Pilih</option>
+                            <option value="yes">Ya</option>
+                            <option value="no">Tidak</option>
                         </select>
                         <label>Diabetes Melitus</label>
                     </div>
                     {#                    21#}
                     <div class="input-field col s6 filtered">
                         <select name="cad">
-                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="" disabled selected>Pilih</option>
                             <option value="yes">Ya</option>
                             <option value="no">Tidak</option>
                         </select>
@@ -165,8 +160,8 @@
                     </div>
                     {#                    22#}
                     <div class="input-field col s6">
-                        <select name="appet">
-                            <option value="NaN" selected>Tidak Diketahui</option>
+                        <select name="appet" class="validate best_atr">
+                            <option value="" disabled selected>Pilih</option>
                             <option value="good">Baik</option>
                             <option value="poor">Buruk</option>
                         </select>
@@ -175,7 +170,7 @@
                     {#                    23#}
                     <div class="input-field col s6 filtered">
                         <select name="pe">
-                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="" disabled selected>Pilih</option>
                             <option value="yes">Ya</option>
                             <option value="no">Tidak</option>
                         </select>
@@ -184,9 +179,9 @@
                     {#                    24#}
                     <div class="input-field col s6 filtered">
                         <select name="ane">
-                            <option value="NaN" selected>Tidak Diketahui</option>
-                            <option value="normal">Ya</option>
-                            <option value="abnormal">Tidak</option>
+                            <option value="" disabled selected>Pilih</option>
+                            <option value="yes">Ya</option>
+                            <option value="no">Tidak</option>
                         </select>
                         <label>Anemia</label>
                     </div>
@@ -206,9 +201,13 @@
         $('#filter').click(function () {
             $("div.filtered").toggle(!this.checked);
             $("input.filtered").prop('checked', this.checked);
+            $("input.best_atr").prop('required', this.checked);
+            $("select.best_atr").prop('required', this.checked);
+            $("select[required]").css({display: "block", height: 0, padding: 0, width: 0, position: 'absolute'});
         });
     });
 
 </script>
+
 {% include "footer.html" %}
 </html>
