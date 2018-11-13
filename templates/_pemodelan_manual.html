@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+{% include "header.html" %}
+
+
+<main>
+    <div class="card-panel">
+        <form action="http://127.0.0.1:5000/manual1" method="POST">
+            <div class="row">
+                <blockquote style="border-left: 5px solid #2196f3 ;"><h3>
+                    Pilih Atribut
+                </h3></blockquote>
+
+                <label>
+                    <input id="custom" name="atribut" type="radio" value="0"/>
+                    <span class="black-text">Custom</span>
+                </label>
+                <label>
+                    <input id="back1" name="atribut" type="radio" checked value="1"/>
+                    <span class="black-text">Backward Elimination, α = 0.1</span>
+                </label>
+                <label>
+                    <input id="back2" name="atribut" type="radio" value="2"/>
+                    <span class="black-text">Backward Elimination, α = 0.05</span>
+                </label>
+                <label>
+                    <input id="all" name="atribut" type="radio" value="3"/>
+                    <span class="black-text">Semua Atribut</span>
+                </label>
+
+            </div>
+            <div class="divider"></div>
+            <div class="row">
+                <div class="col s4">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Input</th>
+                            <th>Nama Atribut</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <label>
+                                    <input class="cust0" type="checkbox" name="age"/>
+                                    <span>age</span>
+                                </label>
+                            </td>
+                            <td>Usia</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                <label>
+                                    <input class="cust0" type="checkbox" name="bp"/>
+                                    <span>bp</span>
+                                </label>
+                            </td>
+                            <td>Tekanan Darah</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>
+                                <label>
+                                    <input class="cust0 backed1" type="checkbox" name="sg" checked/>
+                                    <span>sg</span>
+                                </label>
+                            </td>
+                            <td>Berat Jenis</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>
+                                <label>
+                                    <input class="cust0 backed1" type="checkbox" name="al" checked/>
+                                    <span>al</span>
+                                </label>
+                            </td>
+                            <td>Albumin</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>
+                                <label>
+                                    <input class="cust0" type="checkbox" name="su"/>
+                                    <span>su</span>
+                                </label>
+                            </td>
+                            <td>Gula</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>
+                                <label>
+                                    <input class="cust0" type="checkbox" name="bgr"/>
+                                    <span>bgr</span>
+                                </label>
+                            </td>
+                            <td>Gula Darah Acak</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>
+                                <label>
+                                    <input class="cust0 backed1" type="checkbox" name="bu" checked/>
+                                    <span>bu</span>
+                                </label>
+                            </td>
+                            <td>Urea Darah</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>
+                                <label>
+                                    <input class="cust0 backed1" type="checkbox" name="sc" checked/>
+                                    <span>sc</span>
+                                </label>
+                            </td>
+                            <td>Serum Kreatinin</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                {#KOLOM 2#}
+                <div class="col s4">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Input</th>
+                            <th>Nama Atribut</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>9</td>
+                            <td>
+                                <label>
+                                    <input class="cust0 backed1" type="checkbox" name="sod" checked/>
+                                    <span>sod</span>
+                                </label>
+                            </td>
+                            <td>Sodium</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>
+                                <label>
+                                    <input class="cust0" type="checkbox" name="pot"/>
+                                    <span>pot</span>
+                                </label>
+                            </td>
+                            <td>Potassium</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>
+                                <label>
+                                    <input class="cust0 backed1" type="checkbox" name="hemo" checked/>
+                                    <span>hemo</span>
+                                </label>
+                            </td>
+                            <td>Hemoglobin</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>
+                                <label>
+                                    <input class="cust0" type="checkbox" name="pcv"/>
+                                    <span>pcv</span>
+                                </label>
+                            </td>
+                            <td>Hematokrit</td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>
+                                <label>
+                                    <input class="cust0" type="checkbox" name="wbcc"/>
+                                    <span>wbcc</span>
+                                </label>
+                            </td>
+                            <td>Jml Sel Darah Putih</td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td>
+                                <label>
+                                    <input class="cust0" type="checkbox" name="rbcc"/>
+                                    <span>rbcc</span>
+                                </label>
+                            </td>
+                            <td>Jml Sel Darah Merah</td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td>
+                                <label>
+                                    <input class="cust0" type="checkbox" name="rbc"/>
+                                    <span>rbc</span>
+                                </label>
+                            </td>
+                            <td>Sel Darah Merah</td>
+                        </tr>
+                        <tr>
+                            <td>16</td>
+                            <td>
+                                <label>
+                                    <input class="cust0" type="checkbox" name="pc"/>
+                                    <span>pc</span>
+                                </label>
+                            </td>
+                            <td>Sel Nanah</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {#         KOLOM 3#}
+                <div class="col s4">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Input</th>
+                            <th>Nama Atribut</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>17</td>
+                            <td>
+                                <label>
+                                    <input class="cust0" type="checkbox" name="pcc"/>
+                                    <span>pcc</span>
+                                </label>
+                            </td>
+                            <td>Gumpalan Sel Nanah</td>
+                        </tr>
+                        <tr>
+                            <td>18</td>
+                            <td>
+                                <label>
+                                    <input class="cust0" type="checkbox" name="ba"/>
+                                    <span>ba</span>
+                                </label>
+                            </td>
+                            <td>Bakteri</td>
+                        </tr>
+                        <tr>
+                            <td>19</td>
+                            <td>
+                                <label>
+                                    <input class="cust0 backed1" type="checkbox" name="htn" checked/>
+                                    <span>htn</span>
+                                </label>
+                            </td>
+                            <td>Hipertensi</td>
+                        </tr>
+                        <tr>
+                            <td>20</td>
+                            <td>
+                                <label>
+                                    <input class="cust0 backed1" type="checkbox" name="dm" checked/>
+                                    <span>dm</span>
+                                </label>
+                            </td>
+                            <td>Diabetes Mellitus</td>
+                        </tr>
+                        <tr>
+                            <td>21</td>
+                            <td>
+                                <label>
+                                    <input class="cust0 backed1" type="checkbox" name="cad" checked/>
+                                    <span>cad</span>
+                                </label>
+                            </td>
+                            <td>Penyakit Jantung Koroner</td>
+                        </tr>
+                        <tr>
+                            <td>22</td>
+                            <td>
+                                <label>
+                                    <input class="cust0 backed1" type="checkbox" name="appet" checked/>
+                                    <span>appet</span>
+                                </label>
+                            </td>
+                            <td>Nafsu Makan</td>
+                        </tr>
+                        <tr>
+                            <td>23</td>
+                            <td>
+                                <label>
+                                    <input class="cust0" type="checkbox" name="pe"/>
+                                    <span>pe</span>
+                                </label>
+                            </td>
+                            <td>Pembengkakan Kaki</td>
+                        </tr>
+                        <tr>
+                            <td>24</td>
+                            <td>
+                                <label>
+                                    <input class="cust0" type="checkbox" name="ane"/>
+                                    <span>ane</span>
+                                </label>
+                            </td>
+                            <td>Anemia</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col s12 ">
+                        <br>
+                        <input class="btn btn-primary" type="submit" value="submit">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</main>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#custom').click(function () {
+            $("input.cust0").prop('checked', !this.checked);
+        });
+
+        $('#back1').click(function () {
+            $("input.cust0").prop('checked', !this.checked);
+            $("input.backed1").prop('checked', this.checked);
+        });
+        $("input[type='checkbox']").click(function () {
+            console.log('ganti');
+            $("input[name='atribut'][value='0']").prop("checked", true);
+        });
+
+    });
+
+</script>
+
+{% include "footer.html" %}
+</html>

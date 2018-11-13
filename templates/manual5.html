@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+{% include "header.html" %}
+
+<main>
+    <div class="card-panel">
+        <div class="row">
+            <div class="col s12">
+                <blockquote style="border-left: 5px solid #2196f3 ;"><h3>
+                    Normalisasi
+                </h3>{{ shape[0] }} Data, {{ shape[1] - 2 }} Atribut
+                </blockquote>
+
+
+                <div class="col s12" style="overflow-x: scroll; overflow-y: auto; height: 35em">
+                    {{ df.to_html(index=False , classes="responsive-table striped") | safe }}
+                </div>
+            </div>
+
+            <div class="col s12">
+                <hr>
+            </div>
+            <form action="http://127.0.0.1:5000/manual6" method="POST">
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input name="kNN" id="kNN" type="number" class="validate" min="3" step="2" max="99" value="5"
+                               required>
+                        <label for="kNN">Masukkan Nilai k pada kNN</label>
+                        <span class="helper-text" data-error="Masukkan bilangan ganjil dimulai dari 3"
+                              data-success="Rekomendasi k pada kNN: 5">Min: 3, Max: 99</span>
+                    </div>
+                    <div class="col s6">
+                        <br>
+                        <input class="btn btn-primary green" type="submit" value="prediksi kNN">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</main>
+<hr>
+
+{% include "footer.html" %}
+</html>

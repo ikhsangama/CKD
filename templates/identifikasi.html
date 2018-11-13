@@ -4,82 +4,77 @@
 {% include "header.html" %}
 
 <main>
-    <div class="container">
-        <div class="card-panel">
-            <h2>Identifikasi Pasien</h2>
-            <h5>Menggunakan Seleksi Fitur Algoritma Backward Elimination</h5>
-            <hr>
-            <form action="http://127.0.0.1:5000/send" method="POST">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col s12">
-                            <label>Nama</label>
-                            <input type="text" name="nama">
-                        </div>
-                        <div class="col s6">
-                            <label for="sg">Berat Jenis (g/cm3)</label>
-                            <input type="number" step="any" name="sg" id="sg" value="" min="0" max="1.025">
-                        </div>
-                        <div class="col s6">
-                            <label for="al">Albumin (mg/dl)</label>
-                            <input type="number" step="any" name="al" id="al" value="" min="0" max="5">
-                        </div>
-                        <div class="col s6">
-                            <label for="bu">Urea Darah (mg/dl)</label>
-                            <input type="number" step="any" name="bu" id="bu" value="" min="0" max="400">
-                        </div>
-                        <div class="col s6">
-                            <label for="sc">Kreatinin Serum (mg/dl)</label>
-                            <input type="number" step="any" name="sc" id="sc" value="" min="0" max="80">
-                        </div>
-                        <div class="col s6">
-                            <label for="sod">Sodium (mEq/L) </label>
-                            <input type="number" step="any" name="sod" id="sod" value="" min="0" max="170">
-                        </div>
-                        <div class="col s6">
-                            <label for="hemo">Hemoglobin (gr) </label>
-                            <input type="number" step="any" name="hemo" id="hemo" value="" min="0" max="18">
-                        </div>
-                        <div class="input-field col s6">
-                            <select name="rbc">
-                                <option value="NaN" selected>Tidak Diketahui</option>
-                                <option value="normal">Normal</option>
-                                <option value="abnormal">Abnormal</option>
-                            </select>
-                            <label>Sel Darah Merah</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <select name="htn">
-                                <option value="NaN" selected>Tidak Diketahui</option>
-                                <option value="yes">Ya</option>
-                                <option value="no">Tidak</option>
-                            </select>
-                            <label for="htn">Hipertensi</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <select name="dm">
-                                <option value="NaN" selected>Tidak Diketahui</option>
-                                <option value="yes">Ya</option>
-                                <option value="no">Tidak</option>
-                            </select>
-                            <label for="dm">Diabetes Mellitus</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <select name="appet">
-                                <option value="NaN" selected>Tidak Diketahui</option>
-                                <option value="good">Baik</option>
-                                <option value="poor">Buruk</option>
-                            </select>
-                            <label for="appet">Nafsu Makan</label>
-                        </div>
+    <div class="card-panel">
+        <form action="http://127.0.0.1:5000/send" method="POST">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col s12">
+                        <label>Nama</label>
+                        <input type="text" name="nama">
+                    </div>
+                    <div class="col s6">
+                        <label for="sg">Berat Jenis (g/cm3)</label>
+                        <input type="number" step="any" name="sg" id="sg" value="" min="0" max="1.025">
+                    </div>
+                    <div class="col s6">
+                        <label for="al">Albumin (mg/dl)</label>
+                        <input type="number" step="any" name="al" id="al" value="" min="0" max="5">
+                    </div>
+                    <div class="col s6">
+                        <label for="bu">Urea Darah (mg/dl)</label>
+                        <input type="number" step="any" name="bu" id="bu" value="" min="0" max="400">
+                    </div>
+                    <div class="col s6">
+                        <label for="sc">Kreatinin Serum (mg/dl)</label>
+                        <input type="number" step="any" name="sc" id="sc" value="" min="0" max="80">
+                    </div>
+                    <div class="col s6">
+                        <label for="sod">Sodium (mEq/L) </label>
+                        <input type="number" step="any" name="sod" id="sod" value="" min="0" max="170">
+                    </div>
+                    <div class="col s6">
+                        <label for="hemo">Hemoglobin (gr) </label>
+                        <input type="number" step="any" name="hemo" id="hemo" value="" min="0" max="18">
+                    </div>
+                    <div class="input-field col s6">
+                        <select name="rbc">
+                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="normal">Normal</option>
+                            <option value="abnormal">Abnormal</option>
+                        </select>
+                        <label>Sel Darah Merah</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <select name="htn">
+                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="yes">Ya</option>
+                            <option value="no">Tidak</option>
+                        </select>
+                        <label for="htn">Hipertensi</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <select name="dm">
+                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="yes">Ya</option>
+                            <option value="no">Tidak</option>
+                        </select>
+                        <label for="dm">Diabetes Mellitus</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <select name="appet">
+                            <option value="NaN" selected>Tidak Diketahui</option>
+                            <option value="good">Baik</option>
+                            <option value="poor">Buruk</option>
+                        </select>
+                        <label for="appet">Nafsu Makan</label>
                     </div>
                 </div>
-                <hr>
-                <input class="btn btn-primary" type="submit" value="submit">
-            </form>
-            <hr>
-        </div>
+            </div>
+            <input class="btn btn-primary" type="submit" value="submit">
+        </form>
+        <hr>
     </div>
+
 </main>
 
 <footer class="page-footer blue darken-1">

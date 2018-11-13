@@ -16,21 +16,56 @@
 
 
 </head>
-<body class="blue-grey lighten-5">
+<body>
 <header>
-    <div class="header"></div>
-    <nav>
-        <div class="nav-wrapper blue darken-1">
+    <nav style="height: 110px" class="blue-text white fixed">
+        <div class="nav-wrapper valign-wrapper">
             <div class="row">
-                <div class="col s10 offset-s1">
-                    <a href="/" class="brand-logo">Identifikasi Penyakit Ginjal Kronis</a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        {#                        <li><a href="datamining_1.html">Data</a></li>#}
-                        <li><a href="demo">Pemodelan</a></li>
-                        <li><a href="identifikasi.html">Identifikasi Pasien</a></li>
-                    </ul>
-                </div>
+                <h2>{{ title }}</h2>
             </div>
         </div>
     </nav>
+
+    <style>
+        header, main, footer {
+            padding-left: 300px;
+        }
+    </style>
+
+    <ul id="slide-out" class="sidenav sidenav-fixed">
+        <div class="row">
+            <div class="center">
+                <object style="padding-top: 10px;" id="front-page-logo" type="image/png"
+                        data="static/asset_img/ginjal.png" width="100px"
+                        height="110px">
+                </object>
+                <h6 class="blue-text">Identifikasi Penyakit Ginjal Kronis</h6>
+            </div>
+            <div class="divider"></div>
+        </div>
+
+        <li {% if rule=='/' %} class="active blue" {% endif %}>
+            <a {% if rule=='/' %} class="white-text" {% endif %} href="/">Home</a>
+        </li>
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+                <li {% if rule=='/pemodelan_manual' or '/pemodelan_langsung' %} class="active" {% endif %}>
+                    <a class="collapsible-header" style="padding-left: 30px">Pemodelan</a>
+                    <div class="collapsible-body">
+                        <ul style="padding-left: 15px">
+                            <li><a href="pemodelan_langsung">Langsung</a></li>
+                            <li {% if rule=='/pemodelan_manual' %} class="active blue" {% endif %}>
+                                <a {% if rule=='/pemodelan_manual' %} class="white-text" {% endif %}
+                                                                      href="pemodelan_manual">Manual</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li {% if rule=='/identifikasi' or rule=='/send' %} class="active blue" {% endif %}>
+            <a {% if rule=='/identifikasi' or rule=='/send'%} class="white-text" {% endif %} href="/identifikasi">Identifikasi</a>
+        </li>
+    </ul>
+
 </header>

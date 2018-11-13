@@ -239,12 +239,10 @@ def knn_kfold(df, kNN=5, k_fold=10, shuffle_=True, arr_akurasi=0):
     arr_akurasi : 1 untuk menghasilkan output array akurasi tiap fold, 0 untuk rata - rata akurasi. default = 0
     """
 
-    kf = KFold(n_splits=k_fold, shuffle=shuffle_, random_state=49)
+    kf = KFold(n_splits=k_fold, shuffle=shuffle_, random_state=2)
     akurasi = []
     precision = []
     recall = []
-    sensitivity = []
-    specificity = []
     confusion = []
     for train_index, test_index in kf.split(df):
         train_df = df.iloc[train_index]
@@ -259,16 +257,14 @@ def knn_kfold(df, kNN=5, k_fold=10, shuffle_=True, arr_akurasi=0):
         tp, fn, fp, tn = confusion_matrix(y_test, my_predictions).ravel()
         confusion.append([tp, fn, fp, tn])
         akurasi.append((tp + tn) / (tp + tn + fp + fn) * 100)
-        # precision.append(((tp) / (tp + fp)) * 100)
-        # recall.append(((tp) / (tp + fn)) * 100)
-        sensitivity.append((tp) / (tp + fn) * 100)
-        specificity.append((tn) / (tn + fp) * 100)
+        precision.append(((tp) / (tp + fp)) * 100)
+        recall.append(((tp) / (tp + fn)) * 100)
     #         .confusion matrix
 
     if (arr_akurasi == 1):
-        return confusion, akurasi, sensitivity, specificity
+        return confusion, akurasi, precision, recall
     else:
-        return np.mean(akurasi), np.mean(sensitivity), np.mean(specificity)
+        return np.mean(akurasi), np.mean(precision), np.mean(recall)
 
 
 def find_best_knn(df, start=3, finish=16, step=2, graph=True):
@@ -319,10 +315,10 @@ class DataStore():
     terbaik = False
     dataset_df = dataset()
     target_df = dataset_df['class']
+    new_point_awal = np.empty(0)  # inputan user
+    new_point = np.empty(0)
     dict_tahap_demo = {}
     col = []
-    simpan = False
-    dict_tahap_simpan = {}
     # SEMUA ATRIBUT
 
 
@@ -335,14 +331,12 @@ data = DataStore()
 def index():
     rule = request.url_rule.rule
     class_counts = data.dataset_df["class"].value_counts()
-    return render_template('index.html', class_counts=class_counts, rule=rule,
-                           title="Identifikasi Penyakit Ginjal Kronis")
+    return render_template('index.html', class_counts=class_counts, rule=rule)
 
 
-@app.route('/identifikasi')
+@app.route('/identifikasi.html')
 def identifikasi():
-    rule = request.url_rule.rule
-    return render_template('identifikasi.html', title="Identifikasi Pasien", rule=rule)
+    return render_template('identifikasi.html')
 
 
 @app.route('/send', methods=['GET', 'POST'])
@@ -404,9 +398,11 @@ def send():
         # points = np.array([[1, 1], [1, 2], [1, 3], [2, 1], [2, 2], [2, 3], [3, 1], [3, 2], [3, 3]])
         # outcomes = np.array([0, 0, 0, 0, 1, 1, 1, 1, 1])
         hasil = my.knn_predict(new_point, points, outcomes)
-
-        rule = request.url_rule.rule
-    return render_template('output.html', hasil=hasil, nama=nama, list=l1, title="Hasil Identifikasi", rule=rule)
+        if (hasil == "ckd"):
+            hasil = "positif ginjal kronis"
+        else:
+            hasil = "negatif ginjal kronis"
+    return render_template('output.html', hasil=hasil, nama=nama, list=l1)
 
 
 def training():
@@ -448,7 +444,7 @@ def target():
 @app.route('/pemodelan_manual')
 def pemodelan_manual():
     rule = request.url_rule.rule
-    return render_template("pemodelan_manual.html", rule=rule, title = "Pemodelan Manual")
+    return render_template("pemodelan_manual.html", rule=rule)
 
 
 @app.route('/manual1', methods=['GET', 'POST'])
@@ -464,7 +460,8 @@ def render_1():
     df_class = data.dataset_df["class"]
     data.dataset_df = pd.concat([df_id, df_col, df_class], axis=1)
 
-    return render_template("manual1.html", shape=data.dataset_df.shape, df=data.dataset_df)
+    return render_template("manual1.html", shape=data.dataset_df.shape, tahapan=data.dict_tahap_demo,
+                           df=data.dataset_df)
 
 
 def demo_1send():
@@ -521,17 +518,18 @@ def demo_1send():
             data.col.append('ane')
 
         tahapan = request.form['atribut']
-        if tahapan == "cust":
-            tahap = "Atribut pilihan: " + ', '.join(data.col)
-        elif tahapan == "be1":
-            tahap = "Atribut hasil Backward Elimination, α = 0.1: " + ', '.join(data.col)
-        elif tahapan == "be2":
-            tahap = "Atribut hasil Backward Elimination, α = 0.05: " + ', '.join(data.col)
-        elif tahapan == "all":
-            tahap = "Semua atribut"
+        if tahapan == 0:
+            tahapan = "Atribut pilihan: " + ', '.join(data.col)
+        elif tahapan == 1:
+            tahapan = "Atribut hasil Backward Elimination, α = 0.1: " + ', '.join(data.col)
+        elif tahapan == 2:
+            tahapan = "Atribut hasil Backward Elimination, α = 0.05: " + ', '.join(data.col)
+        elif tahapan == 3:
+            tahapan = "Semua atribut"
 
-        data.dict_tahap_demo['1'] = tahap
+        data.dict_tahap_demo['1'] = tahapan
         df = data.dataset_df
+
     return df
 
 
@@ -549,7 +547,6 @@ def demo_2send():
     daftar_num_cols = ["age", "bp", "sg", "al", "su", "bgr", "bu", "sc", "sod", "pot", "hemo", "pcv", "wbcc",
                        "rbcc"]  # untuk cek outlier
     num_cols = [i for i in data.col if i in daftar_num_cols]
-
     numeric_df = data.dataset_df[num_cols]
     pencilan_df = outliers(numeric_df)
     filtered_df = outliers_removing(data.dataset_df, pencilan_df)
@@ -571,7 +568,9 @@ def render_3():
 
 def demo_3send():
     data.dict_tahap_demo['3'] = "Transformasi Nominal Menjadi Numerik"
+
     daftar_col_nominal = ["rbc", "pc", "pcc", "ba", "htn", "dm", "cad", "appet", "pe", "ane"]  # untuk transformasi
+
     col_nominal = [i for i in data.col if i in daftar_col_nominal]
 
     cut_df_id = data.dataset_df["id"]
@@ -620,25 +619,20 @@ def render_6():
     kNN = demo_6send()
     data.dict_tahap_demo['6'] = "Prediksi kNN, k= " + str(kNN)
 
-    cut_df_id = data.dataset_df["id"]
-    cut_df_col = data.dataset_df[data.col]
-    cut_df_class = data.dataset_df["class"]
-    cut_df = pd.concat([cut_df_col, cut_df_class], axis=1)
-
     start_time = time.time()
-    confusion, akurasi, sensitifity, specificity = knn_kfold(cut_df, arr_akurasi=1, kNN=kNN)
+    confusion, akurasi, precision, recall = knn_kfold(data.dataset_df, arr_akurasi=1, kNN=kNN)
     waktu_validasi = time.time() - start_time
 
     m_akurasi = round(np.mean(akurasi), 3)
-    m_sensitifity = round(np.mean(sensitifity), 3)
-    m_specificity = round(np.mean(specificity), 3)
+    m_precision = round(np.mean(precision), 3)
+    m_recall = round(np.mean(recall), 3)
 
-    return render_template("manual6.html", tahap=data.dict_tahap_demo, terbaik=data.terbaik,
-                           df=data.dataset_df, shape=data.dataset_df.shape, waktu_validasi=waktu_validasi,
-                           akurasi=akurasi,
-                           sensitifity=sensitifity, specificity=specificity, m_akurasi=m_akurasi,
-                           m_sensitifity=m_sensitifity,
-                           m_specificity=m_specificity)
+    return render_template("manual6.html", tahap=data.dict_tahap_demo,
+                           terbaik=data.terbaik, df=data.dataset_df, shape=data.dataset_df.shape,
+                           waktu_validasi=waktu_validasi,
+                           akurasi=akurasi, precision=precision, recall=recall, m_akurasi=m_akurasi,
+                           m_precision=m_precision,
+                           m_recall=m_recall)
 
 
 def demo_6send():
@@ -649,13 +643,6 @@ def demo_6send():
 
 
 # .PREDIKSI kNN
-
-@app.route('/simpan')
-def simpan():
-    data.simpan = True
-    data.dict_tahap_simpan = data.dict_tahap_demo
-    return redirect("identifikasi")
-
 
 if __name__ == '__main__':
     app.debug = True

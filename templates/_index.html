@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+{% include "header.html" %}
+
+<main>
+
+    <div class="card-panel light-blue lighten-4 blue-text text-darken-4">
+        <b>Selamat Datang</b> pada Sistem Aplikasi Identifikasi Penyakit Ginjal Kronis Menggunakan k-Nearest
+        Neighbor dengan Backward Elimination</p>
+    </div>
+    <hr>
+    <hr>
+    <div class="card-panel">
+        <div class="row">
+            <blockquote style="border-left: 5px solid #2196f3 ;"><h2>
+                Statistik Data
+            </h2></blockquote>
+            <hr>
+            <div class="col s8 offset-s2">
+                <canvas id="myChart1" style="width: 50em; height: 25em"></canvas>
+                <h5>
+                    <center>Total: {{ class_counts['ckd']+class_counts['notckd'] }} Data</center>
+                </h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-panel green lighten-4 green-text text-darken-4">
+        <b>Algoritma k-Nearest Neighbor</b>
+        <hr>
+        <blockquote style="border-left: 5px solid #4caf50;">Algoritma yang
+            mengklasifikasikan objek baru berdasarkan data training sample. Dimana hasil dari query instance yang
+            baru diklasifikasikan berdasarkan mayoritas dari <i>k</i> tetangga terdekat. Kelas yang
+            paling banyak muncul nantinya akan menjadi kelas hasil dari klasifikasi yang baru
+        </blockquote>
+    </div>
+
+    <div class="card-panel red lighten-4 red-text text-darken-4">
+        <b>Algoritma Backward Elimination</b>
+        <hr>
+        <blockquote style="border-left: 5px solid #f44336 ;">Algoritma yang
+            bekerja dengan cara menghilangkan atribut - atribut yang kurang relevan pada dataset penyakit ginjal
+            kronis didasarkan pada model regresi linear.
+        </blockquote>
+    </div>
+</main>
+<hr>
+<script>
+    var ctx1 = document.getElementById("myChart1");
+    var myChart1 = new Chart(ctx1, {
+        type: "doughnut",
+        data: {
+            labels: ["Data Positif Penyakit Ginjal Kronis", "Data Negatif Penyakit Ginjal Kronis"],
+            datasets: [{
+                label: 'Total',
+                data: [
+                    {{ class_counts['ckd'] }}, {{ class_counts['notckd'] }}],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 99, 132, 0.8)',
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+    });
+
+    {#    collapsible#}
+    var elem = document.querySelector('.collapsible.expandable');
+    var instance = M.Collapsible.init(elem, {
+        accordion: false
+    });
+    {#    .collapsible#}
+</script>
+{% include "footer.html" %}
+</html>
