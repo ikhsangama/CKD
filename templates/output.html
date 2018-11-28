@@ -5,79 +5,121 @@
 
 <main>
     <div class="card-panel">
-        <h2>Hasil Identifikasi</h2>
-        <h4>Prediksi kNN dengan atribut terbaik</h4>
-        <hr>
 
         <h5>Nama: {{ nama }}</h5>
         <div class="row">
             <div class="col s6">
                 <table>
                     <tbody>
-                    <tr>
-                        <td>Berat Jenis</td>
-                        <td>:</td>
-                        <td>{{ list[0] }} g/cm3</td>
-                    </tr>
-                    <tr>
-                        <td>Albumin</td>
-                        <td>:</td>
-                        <td>{{ list[1] }} mg/dl</td>
-                    </tr>
-                    <tr>
-                        <td>Urea Darah</td>
-                        <td>:</td>
-                        <td>{{ list[2] }} mg/dl</td>
-                    </tr>
-                    <tr>
-                        <td>Kreatinin Serum</td>
-                        <td>:</td>
-                        <td>{{ list[3] }} mg/dl</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>:</td>
-                        <td>{{ list[4] }} mEq/L</td>
-                    </tr>
-                    <tr>
-                        <td>Hemoglobin</td>
-                        <td>:</td>
-                        <td>{{ list[5] }} gr</td>
-                    </tr>
-                    <tr>
-                        <td>Sel Darah Merah</td>
-                        <td>:</td>
-                        <td>{{ list[6] }}</td>
-                    </tr>
-                    <tr>
-                        <td>Hipertensi</td>
-                        <td>:</td>
-                        <td>{{ list[7] }}</td>
-                    </tr>
-                    <tr>
-                        <td>Diabetes Mellitus</td>
-                        <td>:</td>
-                        <td>{{ list[8] }}</td>
-                    </tr>
-                    <tr>
-                        <td>Nafsu Makan</td>
-                        <td>:</td>
-                        <td>{{ list[9] }}</td>
-                    </tr>
+                    {% for i in range(itr) %}
+                        <tr>
+                            <td>
+                                {% if atribut[i] == 'age' %}
+                                    Usia ({{ atribut[i] }})
+                                {% elif atribut[i] == 'bp' %}
+                                    Tekanan Darah ({{ atribut[i] }})
+                                {% elif atribut[i] == 'sg' %}
+                                    Berat Jenis ({{ atribut[i] }})
+                                {% elif atribut[i] == 'al' %}
+                                    Albumin ({{ atribut[i] }})
+                                {% elif atribut[i] == 'su' %}
+                                    Gula ({{ atribut[i] }})
+                                {% elif atribut[i] == 'bgr' %}
+                                    Gula Darah Acak ({{ atribut[i] }})
+                                {% elif atribut[i] == 'bu' %}
+                                    Urea Darah ({{ atribut[i] }})
+                                {% elif atribut[i] == 'sc' %}
+                                    Kreatinin Serum ({{ atribut[i] }})
+                                {% elif atribut[i] == 'sod' %}
+                                    Sodium ({{ atribut[i] }})
+                                {% elif atribut[i] == 'pot' %}
+                                    Potasium ({{ atribut[i] }})
+                                {% elif atribut[i] == 'hemo' %}
+                                    Hemoglobin ({{ atribut[i] }})
+                                {% elif atribut[i] == 'pcv' %}
+                                    Hematokrit ({{ atribut[i] }})
+                                {% elif atribut[i] == 'wbcc' %}
+                                    Jml Sel Darah Putih ({{ atribut[i] }})
+                                {% elif atribut[i] == 'rbcc' %}
+                                    Jml Sel Darah Merah ({{ atribut[i] }})
+                                {% elif atribut[i] == 'rbc' %}
+                                    Sel Darah Merah ({{ atribut[i] }})
+                                {% elif atribut[i] == 'pc' %}
+                                    Sel Darah Putih ({{ atribut[i] }})
+                                {% elif atribut[i] == 'pcc' %}
+                                    Gumpalan Sel Nanah ({{ atribut[i] }})
+                                {% elif atribut[i] == 'ba' %}
+                                    Bacteria ({{ atribut[i] }})
+                                {% elif atribut[i] == 'htn' %}
+                                    Hipertensi ({{ atribut[i] }})
+                                {% elif atribut[i] == 'dm' %}
+                                    Diabetes Mellitus ({{ atribut[i] }})
+                                {% elif atribut[i] == 'cad' %}
+                                    Penyakit Jantung Koroner ({{ atribut[i] }})
+                                {% elif atribut[i] == 'appet' %}
+                                    Nafsu Makan ({{ atribut[i] }})
+                                {% elif atribut[i] == 'pe' %}
+                                    Pembengkakan Kaki ({{ atribut[i] }})
+                                {% elif atribut[i] == 'ane' %}
+                                    Anemia ({{ atribut[i] }})
+                                {% endif %}
+                            </td>
+                            <td>:</td>
+                            <td>
+                                {% if atribut[i] == 'age' %}
+                                    {{ list[i] }} (tahun)
+                                {% elif atribut[i] == 'bp' %}
+                                    {{ list[i] }} (mm/hg)
+                                {% elif atribut[i] == 'sg' %}
+                                    {{ list[i] }} (gr/cm3)
+                                {% elif atribut[i] == 'al' %}
+                                    {{ list[i] }} (mg/dl)
+                                {% elif atribut[i] == 'su' %}
+                                    {{ list[i] }}
+                                {% elif atribut[i] == 'bgr' %}
+                                    {{ list[i] }} (mg/dl)
+                                {% elif atribut[i] == 'bu' %}
+                                    {{ list[i] }} (mg/dl)
+                                {% elif atribut[i] == 'sc' %}
+                                    {{ list[i] }} (mg/dl)
+                                {% elif atribut[i] == 'sod' %}
+                                    {{ list[i] }} (mEq/L)
+                                {% elif atribut[i] == 'pot' %}
+                                    {{ list[i] }} (mEq/L)
+                                {% elif atribut[i] == 'hemo' %}
+                                    {{ list[i] }} (gr)
+                                {% elif atribut[i] == 'pcv' %}
+                                    {{ list[i] }} (mEq/L)
+                                {% elif atribut[i] == 'wbcc' %}
+                                    {{ list[i] }} (cells/cumm)
+                                {% elif atribut[i] == 'rbcc' %}
+                                    {{ list[i] }} (millions/cmm)
+                                {% else %}
+                                    {{ list[i] }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
-                {% if (hasil == "ckd") %}
-                    <h4>Hasil: Positif Ginjal Kronis</h4>
-                {% elif (hasil == "notckd") %}
-                    <h4>Hasil: Negatif Ginjal Kronis</h4>
-                {% endif %}
             </div>
             <div class="col s6">
-                {% if (hasil == "ckd") %}
-                <img src="static/asset_img/pos-red.png" alt="">
-                {% elif (hasil == "notckd") %}
-                <img src="static/asset_img/neg-green.png" alt="">
-                {% endif %}
+                <div class="row">
+                    <div class="col s12">
+                        {% if (hasil == "ckd") %}
+                            <h4>Hasil: Positif Ginjal Kronis</h4>
+                        {% elif (hasil == "notckd") %}
+                            <h4>Hasil: Negatif Ginjal Kronis</h4>
+                        {% endif %}
+                    </div>
+                    <div class="col s12">
+                        {% if (hasil == "ckd") %}
+                            <img src="static/asset_img/pos-red.png" alt="">
+                        {% elif (hasil == "notckd") %}
+                            <img src="static/asset_img/neg-green.png" alt="">
+                        {% endif %}
+                    </div>
+                </div>
 
             </div>
         </div>

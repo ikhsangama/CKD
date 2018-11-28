@@ -53,7 +53,9 @@
                     <a class="collapsible-header" style="padding-left: 30px">Pemodelan</a>
                     <div class="collapsible-body">
                         <ul style="padding-left: 15px">
-                            <li><a href="pemodelan_langsung">Langsung</a></li>
+                            <li {% if rule=='/pemodelan_langsung' %} class="active blue" {% endif %}><a
+                                    {% if rule=='/pemodelan_langsung' %} class="white-text" {% endif %}
+                                                                       href="pemodelan_langsung">Langsung</a></li>
                             <li {% if rule=='/pemodelan_manual' %} class="active blue" {% endif %}>
                                 <a {% if rule=='/pemodelan_manual' %} class="white-text" {% endif %}
                                                                       href="pemodelan_manual">Manual</a>
@@ -64,7 +66,7 @@
             </ul>
         </li>
         <li {% if rule=='/identifikasi' or rule=='/send' %} class="active blue" {% endif %}>
-            <a {% if rule=='/identifikasi' or rule=='/send'%} class="white-text" {% endif %} href="/identifikasi">Identifikasi</a>
+            <a {% if rule=='/identifikasi' or rule=='/send' %} class="white-text" {% endif %} href="/identifikasi">Identifikasi</a>
         </li>
     </ul>
 

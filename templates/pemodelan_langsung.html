@@ -6,7 +6,7 @@
 
 <main>
     <div class="card-panel">
-        <form action="http://127.0.0.1:5000/manual1" method="POST">
+        <form action="http://127.0.0.1:5000/langsung1" method="POST">
             <div class="row">
                 <blockquote style="border-left: 5px solid #2196f3 ;"><h3>
                     Pilih Atribut
@@ -314,9 +314,65 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="row">
+                    <div class="col s12">
+                        <blockquote style="border-left: 5px solid #2196f3 ;"><h3>
+                            Pilih Tahapan
+                        </h3></blockquote>
+                        <div class="row">
+                            <div class="col s3">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" name="pem_out"/>
+                                        <span class="black-text">Pembersihan Outlier</span>
+                                    </label>
+                                </p>
+                            </div>
+
+                            <div class="col s3">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" checked disabled/>
+                                        <span class="black-text">Transformasi Data</span>
+                                    </label>
+                                </p>
+                            </div>
+
+                            <div class="col s3">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" checked disabled/>
+                                        <span class="black-text">Penanganan Missing Value</span>
+                                    </label>
+                                </p>
+                            </div>
+
+                            <div class="col s3">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" name="norm"/>
+                                        <span class="black-text">Normalisasi</span>
+                                    </label>
+                                </p>
+                            </div>
+                            <div class="col s12 divider"></div>
+                            <div class="col s3">
+                                <div class="input-field">
+                                    <input name="kNN" id="kNN" type="number" class="validate" min="3" step="2" max="99"
+                                           value="5"
+                                           required>
+                                    <label for="kNN">Masukkan Nilai k pada kNN</label>
+                                    <span class="helper-text" data-error="Masukkan bilangan ganjil dimulai dari 3"
+                                          data-success="Rekomendasi k pada kNN: 5">Min: 3, Max: 99</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col s12 ">
-                        <br>
                         <input class="btn btn-primary" type="submit" value="submit">
                     </div>
                 </div>

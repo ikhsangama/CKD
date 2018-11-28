@@ -5,74 +5,196 @@
 
 <main>
     <div class="card-panel">
+
+        <div class="col s12">
+            <blockquote style="border-left: 5px solid #2196f3 ;">
+                <h3>
+                    Tahap Pemodelan
+                </h3>
+            </blockquote>
+            {% for key, value in tahap.items() %}
+                {% if value!=None %}
+                    <p>{{ value }}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="col s12 divider"></div>
+
+
+        <blockquote style="border-left: 5px solid #2196f3 ;"><h3>
+            Input
+        </h3>
+        </blockquote>
+
         <form action="http://127.0.0.1:5000/send" method="POST">
             <div class="form-group">
                 <div class="row">
                     <div class="col s12">
-                        <label>Nama</label>
-                        <input type="text" name="nama">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <label>Nama</label>
+                                <input type="text" name="nama">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col s6">
-                        <label for="sg">Berat Jenis (g/cm3)</label>
-                        <input type="number" step="any" name="sg" id="sg" value="" min="0" max="1.025">
+                    <div hidden class="age input-field col s6">
+                        <label for="age">Usia (tahun)</label>
+                        <input type="number" name="age" id="age" value="" min="2" max="90">
+                        <span class="helper-text" data-error="min=2, max=90">min=2, max=90</span>
                     </div>
-                    <div class="col s6">
+                    <div hidden class="bp input-field col s6">
+                        <label for="bp">Tekanan Darah(mm/hg)</label>
+                        <input type="number" step="any" name="bp" id="bp" value="" min="50" max="180">
+                        <span class="helper-text" data-error="min=50, max=180">min=50, max=180</span>
+                    </div>
+                    <div hidden class="sg input-field col s6">
+                        <label for="sg">Berat Jenis (gr/cm3)</label>
+                        <input class="validate" type="number" step="any" name="sg" id="sg" value="" min="0" max="1.025">
+                        <span class="helper-text" data-error="min=0, max=1.025">min=0, max=1.025</span>
+                    </div>
+                    <div hidden class="al input-field col s6">
                         <label for="al">Albumin (mg/dl)</label>
-                        <input type="number" step="any" name="al" id="al" value="" min="0" max="5">
+                        <input type="number" step="1" name="al" id="al" value="" min="0" max="5">
+                        <span class="helper-text" data-error="min=0, max=5">min=0, max=5</span>
                     </div>
-                    <div class="col s6">
+                    <div hidden class="su input-field col s6">
+                        <label for="su">Gula</label>
+                        <input type="number" step="1" name="su" id="su" value="" min="0" max="5">
+                        <span class="helper-text" data-error="min=0, max=5">min=0, max=5</span>
+                    </div>
+                    <div hidden class="bgr input-field col s6">
+                        <label for="bgr">Gula Darah Acak (mg/dl)</label>
+                        <input type="number" step="1" name="bgr" id="bgr" value="" min="60" max="490">
+                        <span class="helper-text" data-error="min=60, max=490">min=60, max=490</span>
+                    </div>
+                    <div hidden class="bu input-field col s6">
                         <label for="bu">Urea Darah (mg/dl)</label>
-                        <input type="number" step="any" name="bu" id="bu" value="" min="0" max="400">
+                        <input type="number" step="1" name="bu" id="bu" value="" min="10" max="391">
+                        <span class="helper-text" data-error="min=10, max=391">min=10, max=391</span>
                     </div>
-                    <div class="col s6">
+                    <div hidden class="sc input-field col s6">
                         <label for="sc">Kreatinin Serum (mg/dl)</label>
-                        <input type="number" step="any" name="sc" id="sc" value="" min="0" max="80">
+                        <input type="number" step="any" name="sc" id="sc" value="" min="0.4" max="76">
+                        <span class="helper-text" data-error="min=0.4, max=76">min=0.4, max=76</span>
                     </div>
-                    <div class="col s6">
+                    <div hidden class="sod input-field col s6">
                         <label for="sod">Sodium (mEq/L) </label>
-                        <input type="number" step="any" name="sod" id="sod" value="" min="0" max="170">
+                        <input type="number" step="1" name="sod" id="sod" value="" min="104" max="163">
+                        <span class="helper-text" data-error="min=104, max=163">min=104, max=163</span>
                     </div>
-                    <div class="col s6">
+                    <div hidden class="pot input-field col s6">
+                        <label for="pot">Potasium (mEq/L) </label>
+                        <input type="number" step="any" name="pot" id="pot" value="" min="2.5" max="7.6">
+                        <span class="helper-text" data-error="min=2.5, max=7.6">min=2.5, max=7.6</span>
+                    </div>
+                    <div hidden class="hemo input-field col s6">
                         <label for="hemo">Hemoglobin (gr) </label>
-                        <input type="number" step="any" name="hemo" id="hemo" value="" min="0" max="18">
+                        <input type="number" step="any" name="hemo" id="hemo" value="" min="3.1" max="17.8">
+                        <span class="helper-text" data-error="min=3.1, max=17.8">min=3.1, max=17.8</span>
                     </div>
-                    <div class="input-field col s6">
-                        <select name="rbc">
-                            <option value="NaN" selected>Tidak Diketahui</option>
+                    <div hidden class="pcv input-field col s6">
+                        <label for="pcv">Hematokrit (mEq/L) </label>
+                        <input type="number" step="1" name="pcv" id="pcv" value="" min="9" max="54">
+                        <span class="helper-text" data-error="min=9, max=54">min=9, max=54</span>
+                    </div>
+                    <div hidden class="wbcc input-field col s6">
+                        <label for="wbcc">Jml Sel Darah Putih (cells/cumm) </label>
+                        <input type="number" step="100" name="wbcc" id="wbcc" value="" min="2200" max="26400">
+                        <span class="helper-text" data-error="min=2200, max=26400">min=2200, max=26400</span>
+                    </div>
+                    <div hidden class="rbcc input-field col s6">
+                        <label for="rbcc">Jml Sel Darah Merah (millions/cmm) </label>
+                        <input type="number" step="any" name="rbcc" id="rbcc" value="" min="2.1" max="8">
+                        <span class="helper-text" data-error="min=2.1, max=8">min=2.1, max=8</span>
+                    </div>
+                    <div class="col s12">
+                        <div class="divider"></div>
+                    </div>
+                    <div hidden class="rbc input-field col s6">
+                        <select id="rbc" name="rbc">
+                            <option value="" disabled selected>Pilih</option>
                             <option value="normal">Normal</option>
                             <option value="abnormal">Abnormal</option>
                         </select>
-                        <label>Sel Darah Merah</label>
+                        <label for="rbc">Sel Darah Merah</label>
                     </div>
-                    <div class="input-field col s6">
-                        <select name="htn">
-                            <option value="NaN" selected>Tidak Diketahui</option>
+                    <div hidden class="pc input-field col s6">
+                        <select id="pc" name="pc">
+                            <option value="" disabled selected>Pilih</option>
+                            <option value="normal">Normal</option>
+                            <option value="abnormal">Abnormal</option>
+                        </select>
+                        <label for="pc">Sel Darah Putih</label>
+                    </div>
+                    <div hidden class="pcc input-field col s6">
+                        <select id="pcc" name="pcc">
+                            <option value="" disabled selected>Pilih</option>
+                            <option value="present">Ada</option>
+                            <option value="notpresent">Tidak Ada</option>
+                        </select>
+                        <label for="pcc">Gumpalan Sel Nanah</label>
+                    </div>
+                    <div hidden class="ba input-field col s6">
+                        <select id="ba" name="ba">
+                            <option value="" disabled selected>Pilih</option>
+                            <option value="present">Ada</option>
+                            <option value="notpresent">Tidak Ada</option>
+                        </select>
+                        <label for="ba">Bakteri</label>
+                    </div>
+                    <div hidden class="htn input-field col s6">
+                        <select id="htn" name="htn">
+                            <option value="" disabled selected>Pilih</option>
                             <option value="yes">Ya</option>
                             <option value="no">Tidak</option>
                         </select>
                         <label for="htn">Hipertensi</label>
                     </div>
-                    <div class="input-field col s6">
-                        <select name="dm">
-                            <option value="NaN" selected>Tidak Diketahui</option>
+                    <div hidden class="dm input-field col s6">
+                        <select id="dm" name="dm">
+                            <option value="" disabled selected>Pilih</option>
                             <option value="yes">Ya</option>
                             <option value="no">Tidak</option>
                         </select>
                         <label for="dm">Diabetes Mellitus</label>
                     </div>
-                    <div class="input-field col s6">
-                        <select name="appet">
-                            <option value="NaN" selected>Tidak Diketahui</option>
+                    <div hidden class="cad input-field col s6">
+                        <select id="cad" name="cad">
+                            <option value="" disabled selected>Pilih</option>
+                            <option value="yes">Ya</option>
+                            <option value="no">Tidak</option>
+                        </select>
+                        <label for="cad">Penyakit Jantung Koroner</label>
+                    </div>
+                    <div hidden class="appet input-field col s6">
+                        <select id="appet" name="appet">
+                            <option value="" disabled selected>Pilih</option>
                             <option value="good">Baik</option>
                             <option value="poor">Buruk</option>
                         </select>
                         <label for="appet">Nafsu Makan</label>
                     </div>
+                    <div hidden class="pe input-field col s6">
+                        <select id="pe" name="pe">
+                            <option value="" disabled selected>Pilih</option>
+                            <option value="yes">Ya</option>
+                            <option value="no">Tidak</option>
+                        </select>
+                        <label for="pe">Pembengkakan Kaki</label>
+                    </div>
+                    <div hidden class="ane input-field col s6">
+                        <select id="ane" name="ane">
+                            <option value="" disabled selected>Pilih</option>
+                            <option value="yes">Ya</option>
+                            <option value="no">Tidak</option>
+                        </select>
+                        <label for="ane">Anemia</label>
+                    </div>
                 </div>
+                <a class="btn btn-primary red lighten-1" href="reset">Reset Pemodelan</a>
+                <input class="btn btn-primary" type="submit" value="Identifikasi">
             </div>
-            <input class="btn btn-primary" type="submit" value="submit">
         </form>
-        <hr>
     </div>
 
 </main>
@@ -87,6 +209,15 @@
 
 <script type="text/javascript">
     M.AutoInit();
+</script>
+<script>
+    $(document).ready(function () {
+        {% for atr in atribut %}
+            $("div.{{ atr }}").prop('hidden', false)
+            $("#{{ atr }}").prop('required', true)
+            $("select[required]").css({display: "block", height: 0, padding: 0, width: 0, position: 'absolute'});
+        {% endfor %}
+    });
 </script>
 </body>
 </html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+{% include "header.html" %}
+
+<main>
+    <div class="card-panel">
+        <h2>Hasil Identifikasi</h2>
+        <h4>Prediksi kNN dengan atribut terbaik</h4>
+        <hr>
+
+        <h5>Nama: {{ nama }}</h5>
+        <div class="row">
+            <div class="col s6">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>Berat Jenis</td>
+                        <td>:</td>
+                        <td>{{ list[0] }} g/cm3</td>
+                    </tr>
+                    <tr>
+                        <td>Albumin</td>
+                        <td>:</td>
+                        <td>{{ list[1] }} mg/dl</td>
+                    </tr>
+                    <tr>
+                        <td>Urea Darah</td>
+                        <td>:</td>
+                        <td>{{ list[2] }} mg/dl</td>
+                    </tr>
+                    <tr>
+                        <td>Kreatinin Serum</td>
+                        <td>:</td>
+                        <td>{{ list[3] }} mg/dl</td>
+                    </tr>
+                    <tr>
+                        <td>Sodium</td>
+                        <td>:</td>
+                        <td>{{ list[4] }} mEq/L</td>
+                    </tr>
+                    <tr>
+                        <td>Hemoglobin</td>
+                        <td>:</td>
+                        <td>{{ list[5] }} gr</td>
+                    </tr>
+                    <tr>
+                        <td>Sel Darah Merah</td>
+                        <td>:</td>
+                        <td>{{ list[6] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Hipertensi</td>
+                        <td>:</td>
+                        <td>{{ list[7] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Diabetes Mellitus</td>
+                        <td>:</td>
+                        <td>{{ list[8] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nafsu Makan</td>
+                        <td>:</td>
+                        <td>{{ list[9] }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                {% if (hasil == "ckd") %}
+                    <h4>Hasil: Positif Ginjal Kronis</h4>
+                {% elif (hasil == "notckd") %}
+                    <h4>Hasil: Negatif Ginjal Kronis</h4>
+                {% endif %}
+            </div>
+            <div class="col s6">
+                {% if (hasil == "ckd") %}
+                <img src="static/asset_img/pos-red.png" alt="">
+                {% elif (hasil == "notckd") %}
+                <img src="static/asset_img/neg-green.png" alt="">
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+</main>
+<hr>
+{% include "footer.html" %}
+</html>
