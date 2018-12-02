@@ -80,12 +80,13 @@ def outliers(df, k1=0.25, k3=0.75, multiply=1.5):
     df: input tipe dataframe, hanya menerima numeric
 
     mendeteksi data yang diluar batas bawah dan batas atas
-    batas bawah = k1 - (k3-k1)*1.5
-    batas atas = k3 + (k3-k1)*1.5
+    batas bawah = k1 - (k3-k1)*multiply
+    batas atas = k3 + (k3-k1)*multiply
     """
     pencilan = df.apply(
-        lambda x: (x < df[x.name].quantile(k1) - ((df[x.name].quantile(k3) - df[x.name].quantile(k1)) * 1.5)) | (
-                x > df[x.name].quantile(k3) + ((df[x.name].quantile(k3) - df[x.name].quantile(k1)) * 1.5)), axis=0)
+        lambda x: (x < df[x.name].quantile(k1) - ((df[x.name].quantile(k3) - df[x.name].quantile(k1)) * multiply)) | (
+                    x > df[x.name].quantile(k3) + ((df[x.name].quantile(k3) - df[x.name].quantile(k1)) * multiply)),
+        axis=0)
     return pencilan
 
 
@@ -107,13 +108,12 @@ def outliers_removing(df, pencilan):
 #
 # 4.1
 #
-def encoding(df, column="all_nominal",
-             all_nominal=["rbc", "pc", "pcc", "ba", "htn", "dm", "cad", "appet", "pe", "ane", "class"]):
+def encoding(df, cols=["rbc", "pc", "pcc", "ba", "htn", "dm", "cad", "appet", "pe", "ane", "class"]):
     """
     paramters:
     ----------
     df: input tipe dataframe
-    column: input tipe string, menentukan kolom nominal mana yang akan di transformasi menjadi numerik
+    cols: input tipe array, menentukan kolom nominal mana yang akan di transformasi menjadi numerik
 
     output:
     ----------
@@ -123,20 +123,15 @@ def encoding(df, column="all_nominal",
     # python melakukan pass by reference, sehingga dibuat copy agar df sebelumnya tidak berubah
 
     copy_df = df.copy()
-    if (column != "all_nominal"):
-        a = copy_df[column].unique().tolist()
+    for col in cols:
+        a = copy_df[col].unique().tolist()
         c = [x for x in a if str(x) != 'nan']
         l = []
         i = 0
         for x in c:
             l.append(i)
             i += 1
-        copy_df[column] = copy_df[column].replace(c, l)
-
-    elif (column == "all_nominal"):
-        #         all_nominal = ["rbc", "pc", "pcc", "ba", "htn", "dm", "cad", "appet", "pe", "ane","class"]
-        for col in all_nominal:
-            copy_df = encoding(copy_df, col)  # rekursif
+        copy_df[col] = copy_df[col].replace(c, l)
 
     return copy_df
 
@@ -144,34 +139,30 @@ def encoding(df, column="all_nominal",
 #
 # 4.2
 #
-def missing_handling(df, column="all", method="mean",
-                     all_col=["age", "bp", "sg", "al", "su", "bgr", "bu", "sc", "sod", "pot", "hemo", "pcv", "wbcc",
-                              "rbcc", "rbc", "pc", "pcc", "ba", "htn", "dm", "cad", "appet", "pe", "ane", "class"]):
+def missing_handling(df, cols=["age", "bp", "sg", "al", "su", "bgr", "bu", "sc", "sod", "pot", "hemo", "pcv", "wbcc",
+                               "rbcc", "rbc", "pc", "pcc", "ba", "htn", "dm", "cad", "appet", "pe", "ane", "class"],
+                     method="mean"):
     """
     paramters:
     ----------
     df: input tipe dataframe
-    column: menentukan kolom numerik mana yang akan dilakukan penanganan missing value
+    cols: menentukan kolom numerik mana yang akan dilakukan penanganan missing value
     method: strategi penanganan missing value
 
     output:
     ----------
-    mengembalikan dataframe dengan kolom yang sudah dilakukan penanganan NaN
+    mengembalikan dataframe dengan kolom yang sudah dilakukan penanganan "NaN"
     """
 
     copy_df = df.copy()
     imputer = Imputer(missing_values="NaN", strategy=method, axis=0)
 
-    if (column != "all"):
-        imputer = imputer.fit(copy_df[[column]])
-        filledmissing_df = imputer.transform(copy_df[[column]])
+    for col in cols:
+        imputer = imputer.fit(copy_df[[col]])
+        filledmissing_df = imputer.transform(copy_df[[col]])
         df_change = filledmissing_df.ravel()
-        copy_df[column] = df_change
+        copy_df[col] = df_change
 
-    elif (column == "all"):
-        #         all_col = ["age", "bp", "sg", "al", "su", "bgr", "bu", "sc", "sod", "pot", "hemo", "pcv", "wbcc", "rbcc", "rbc", "pc", "pcc", "ba", "htn", "dm", "cad", "appet", "pe", "ane", "class"]
-        for col in all_col:
-            copy_df = missing_handling(copy_df, col, method)  # rekursif
     return copy_df
 
 
@@ -181,14 +172,13 @@ def missing_handling(df, column="all", method="mean",
 from sklearn.preprocessing import MinMaxScaler
 
 
-def normalizing(df, column="all", f_range=(0, 1),
-                all_col=["age", "bp", "sg", "al", "su", "bgr", "bu", "sc", "sod", "pot", "hemo", "pcv", "wbcc", "rbcc",
-                         "rbc", "pc", "pcc", "ba", "htn", "dm", "cad", "appet", "pe", "ane"]):
+def normalizing(df, cols=["age", "bp", "sg", "al", "su", "bgr", "bu", "sc", "sod", "pot", "hemo", "pcv", "wbcc", "rbcc",
+                          "rbc", "pc", "pcc", "ba", "htn", "dm", "cad", "appet", "pe", "ane"], f_range=(0, 1)):
     """
     paramters:
     ----------
     df: input tipe dataframe
-    column: menentukan kolom numerik mana yang akan dilakukan penanganan missing value
+    cols: menentukan kolom numerik mana yang akan dilakukan penanganan missing value
     range: range normalisasi
 
     output:
@@ -198,17 +188,34 @@ def normalizing(df, column="all", f_range=(0, 1),
 
     copy_df = df.copy()
     scale = MinMaxScaler(feature_range=f_range)
-
-    if (column != "all"):
-        normalization_array = scale.fit_transform(copy_df[[column]])
+    for col in cols:
+        normalization_array = scale.fit_transform(copy_df[[col]])
         df_change = normalization_array.ravel()
-        copy_df[column] = df_change
+        copy_df[col] = df_change
 
-    elif (column == "all"):
-        #         all_col = ["age", "bp", "sg", "al", "su", "bgr", "bu", "sc", "sod", "pot", "hemo", "pcv", "wbcc", "rbcc", "rbc", "pc", "pcc", "ba", "htn", "dm", "cad", "appet", "pe", "ane"]
-        for col in all_col:
-            copy_df = normalizing(copy_df, col, f_range)  # rekursif
     return copy_df
+
+# Backward Elimination
+import statsmodels.formula.api as sm
+
+
+def backward_elimination(splitdf_x, splitdf_y, sl=0.05):
+    sl_ = sl
+    copy_df = splitdf_x.copy()
+    reg_ols = sm.OLS(endog=splitdf_y, exog=copy_df).fit()
+    pval = reg_ols.pvalues
+    maks_pval = max(pval)
+
+    if (maks_pval >= sl_):
+        delete_col = pval[pval == maks_pval].index[0]
+        drp = [delete_col]
+        copy_df = copy_df.drop(drp, axis=1)
+        copy_df = backward_elimination(copy_df, splitdf_y, sl_)
+
+    else:
+        copy_df = pd.concat([copy_df, splitdf_y], axis=1)
+    return copy_df
+
 
 
 #
@@ -320,9 +327,11 @@ class DataStore():
     dataset_df = dataset()
     target_df = dataset_df['class']
     dict_tahap_demo = {}
-    col = []
-    col_def = ["bp", "sg", "al", "bgr", "bu", "sc", "sod", "hemo", "rbc", "htn", "dm", "appet"]
-    col_simpan = []
+
+    cols = []
+    cols_def = ["bp", "sg", "al", "bgr", "bu", "sc", "sod", "hemo", "rbc", "htn", "dm", "appet"]
+    cols_simpan = []
+
     simpan = False
     dict_tahap_simpan = {}
     dict_tahap_default = {
@@ -331,7 +340,8 @@ class DataStore():
         '3': "Transformasi Nominal Menjadi Numerik",
         '4': "Penanganan Missing Value",
         '5': "Normalisasi",
-        '6': 'Prediksi kNN, k= 5',
+        '6': None,
+        '7': 'Prediksi kNN, k= 5',
     }
     outlier_temp = False
     outlier_def = False
@@ -363,14 +373,14 @@ def index():
 @app.route('/identifikasi')
 def identifikasi():
     rule = request.url_rule.rule
-    if (data.simpan == False):
+    if(data.simpan):
+        tahap = data.dict_tahap_simpan
+        atribut = data.cols_simpan
+    else:
         reset()
         tahap = data.dict_tahap_default
-        atribut = data.col_def
-    else:
-        tahap = data.dict_tahap_simpan
-        atribut = data.col_simpan
-    print(atribut)
+        atribut = data.cols_def
+
     return render_template('identifikasi.html', title="Identifikasi Pasien", rule=rule, tahap=tahap, atribut=atribut)
 
 
@@ -380,74 +390,79 @@ def send():
         nama = request.form['nama']
         l1 = []
         if (data.simpan == True):
-            col = data.col_simpan
+            cols = data.cols_simpan
             kNN = data.k_simpan
         else:
-            col = data.col_def
+            cols = data.cols_def
             kNN = data.k_def
-        for i in col:
+        for i in cols:
             try:
                 l1.append(float(request.form[i]))
             except:
                 l1.append(request.form[i])
 
-        print(l1)
         # MENGAMBIL INPUT SEBAGAI DF DAN MENGGABUNGKAN DENGAN TRAINING DF ATRIBUT TERBAIK
         array_p = np.array(l1)
-        p_df = pd.DataFrame(array_p.reshape(1, -1), columns=col)
+        p_df = pd.DataFrame(array_p.reshape(1, -1), columns=cols)
         dataset_df = dataset()
-        cut_df = dataset_df[col]  # membuang kolom id dan kelas
+        cut_df = dataset_df[cols]  # membuang kolom id dan kelas
         inputed_df = cut_df.append(p_df, ignore_index=True)
         # .MENGAMBIL INPUT SEBAGAI DF DAN MENGGABUNGKAN DENGAN TRAINING DF ATRIBUT TERBAIK
         # TRANSFORMASI & NORMALISASI INPUT
-        new_point, points = best_attribute_training(inputed_df, col=col)
+        new_point, points = best_attribute_training(inputed_df, cols=cols)
         # .TRANSFORMASI & NORMALISASI INPUT
         outcomes = dataset_df["class"].values
         # points = np.array([[1, 1], [1, 2], [1, 3], [2, 1], [2, 2], [2, 3], [3, 1], [3, 2], [3, 3]])
         # outcomes = np.array([0, 0, 0, 0, 1, 1, 1, 1, 1])
+        print('newp')
+        print(new_point)
+        print('poin')
+        print(points)
+        print('outc')
+        print(outcomes)
         hasil = my.knn_predict(new_point, points, outcomes, k=kNN)
-        itr = len(col)
+        itr = len(cols)
 
         rule = request.url_rule.rule
-    return render_template('output.html', hasil=hasil, nama=nama, itr=itr, atribut=col, list=l1,
+    return render_template('output.html', hasil=hasil, nama=nama, itr=itr, atribut=cols, list=l1,
                            title="Hasil Identifikasi", rule=rule)
 
 
-def best_attribute_training(dataset, col=['sg', 'al', 'bu', 'sc', 'sod', 'hemo', 'rbc', 'htn', 'dm', 'appet']):
+def best_attribute_training(dataset, cols=['sg', 'al', 'bu', 'sc', 'sod', 'hemo', 'rbc', 'htn', 'dm', 'appet']):
     # return pertama yang akan diuji, return kedua data training
     df = dataset.copy()
-    cut_df = df[col]
+    cut_df = df[cols]
 
     # OUTLIERS REMOVING
     if (data.simpan == True):
         if (data.dict_tahap_simpan.get('2') == True):
             df = cut_df.copy()
-            daftar_numeric_col = ['age', 'bp', 'sg', 'al', 'su', 'bgr', 'bu', 'sc', 'sod', 'pot', 'hemo', 'pcv', 'wbcc',
+            daftar_numeric_cols = ['age', 'bp', 'sg', 'al', 'su', 'bgr', 'bu', 'sc', 'sod', 'pot', 'hemo', 'pcv', 'wbcc',
                                   'rbc']
-            numeric_col = [i for i in col if i in daftar_numeric_col]
-            numeric_df = df[numeric_col]
+            numeric_cols = [i for i in cols if i in daftar_numeric_cols]
+            numeric_df = df[numeric_cols]
             pencilan_df = outliers(numeric_df)
             cut_df = outliers_removing(df, pencilan_df)
     # .OUTLIERS REMOVING
 
     # ENCODING
-    daftar_col_nominal = ["rbc", "pc", "pcc", "ba", "htn", "dm", "cad", "appet", "pe", "ane"]
-    col_nominal = [i for i in col if i in daftar_col_nominal]
-    encoding_df = encoding(cut_df, all_nominal=col_nominal)
+    daftar_cols_nominal = ["rbc", "pc", "pcc", "ba", "htn", "dm", "cad", "appet", "pe", "ane"]
+    cols_nominal = [i for i in cols if i in daftar_cols_nominal]
+    encoding_df = encoding(cut_df, cols=cols_nominal)
     # .ENCODING
 
     # MISSING HANDLING
-    missing_handling_df = missing_handling(encoding_df, all_col=col)
+    missing_handling_df = missing_handling(encoding_df, cols=cols)
     final_df = missing_handling_df
     # .MISSING HANDLING
 
     # NORMALIZING
     if (data.simpan == False):
-        normalizing_df = normalizing(missing_handling_df, all_col=col)
+        normalizing_df = normalizing(missing_handling_df, cols=cols)
         final_df = normalizing_df
     else:
         if (data.dict_tahap_simpan.get('4') == "Normalisasi"):
-            normalizing_df = normalizing(missing_handling_df, all_col=col)
+            normalizing_df = normalizing(missing_handling_df, cols=cols)
             final_df = normalizing_df
     # .NORMALIZING
     return final_df.values[-1].tolist(), final_df.iloc[:-1].values
@@ -458,8 +473,7 @@ def pemodelan_langsung():
     data.dict_tahap_demo = {}
     rule = request.url_rule.rule
     data.dataset_df = dataset()
-    data.col = []
-    data.col = []
+    data.cols = []
     return render_template("pemodelan_langsung.html", rule=rule, title="Pemodelan Langsung")
 
 
@@ -467,122 +481,147 @@ def pemodelan_langsung():
 def langsung1():
     if request.method == "POST":
         # TAHAP1
-        col = []
+        cols = []
         if (request.form.get('age', False) != False):
-            col.append('age')
+            cols.append('age')
         if (request.form.get('bp', False) != False):
-            col.append('bp')
+            cols.append('bp')
         if (request.form.get('sg', False) != False):
-            col.append('sg')
+            cols.append('sg')
         if (request.form.get('al', False) != False):
-            col.append('al')
+            cols.append('al')
         if (request.form.get('su', False) != False):
-            col.append('su')
+            cols.append('su')
         if (request.form.get('bgr', False) != False):
-            col.append('bgr')
+            cols.append('bgr')
         if (request.form.get('bu', False) != False):
-            col.append('bu')
+            cols.append('bu')
         if (request.form.get('sc', False) != False):
-            col.append('sc')
+            cols.append('sc')
         if (request.form.get('sod', False) != False):
-            col.append('sod')
+            cols.append('sod')
         if (request.form.get('pot', False) != False):
-            col.append('pot')
+            cols.append('pot')
         if (request.form.get('hemo', False) != False):
-            col.append('hemo')
+            cols.append('hemo')
         if (request.form.get('pcv', False) != False):
-            col.append('pcv')
+            cols.append('pcv')
         if (request.form.get('wbcc', False) != False):
-            col.append('wbcc')
+            cols.append('wbcc')
         if (request.form.get('rbcc', False) != False):
-            col.append('rbcc')
+            cols.append('rbcc')
 
         # MULAI NOMINAL
         if (request.form.get('rbc', False) != False):
-            col.append('rbc')
+            cols.append('rbc')
         if (request.form.get('pc', False) != False):
-            col.append('pc')
+            cols.append('pc')
         if (request.form.get('pcc', False) != False):
-            col.append('pcc')
+            cols.append('pcc')
         if (request.form.get('ba', False) != False):
-            col.append('ba')
+            cols.append('ba')
         if (request.form.get('htn', False) != False):
-            col.append('htn')
+            cols.append('htn')
         if (request.form.get('dm', False) != False):
-            col.append('dm')
+            cols.append('dm')
         if (request.form.get('cad', False) != False):
-            col.append('cad')
+            cols.append('cad')
         if (request.form.get('appet', False) != False):
-            col.append('appet')
+            cols.append('appet')
         if (request.form.get('pe', False) != False):
-            col.append('pe')
+            cols.append('pe')
         if (request.form.get('ane', False) != False):
-            col.append('ane')
+            cols.append('ane')
 
-        tahapan = request.form['atribut']
-        if tahapan == "cust":
-            tahap = "Atribut pilihan: " + ', '.join(col)
-        elif tahapan == "be1":
-            tahap = "Atribut hasil Backward Elimination, α = 0.1: " + ', '.join(col)
-        elif tahapan == "be2":
-            tahap = "Atribut hasil Backward Elimination, α = 0.05: " + ', '.join(col)
-        elif tahapan == "all":
-            tahap = "Semua atribut"
+        atribut_awal = 'Atribut awal: '+ ', '.join(cols)
 
         data.dict_tahap_demo = {}
-        data.col = []
-        data.col = col
-        data.dict_tahap_demo['1'] = tahap
+        data.cols = []
+        data.cols = cols
+        data.dict_tahap_demo['1'] = atribut_awal
 
-        print('outlier')
-        print(request.form.get('pem_out', False) != False)
         #     TAHAP2 PEMBERSIHAN OUTLIER
-        if (request.form.get('pem_out', False) != False):
+        if request.form.get('pem_out', False) != False:
             data.outlier_temp = True
             data.dict_tahap_demo['2'] = "Pembersihan Outlier"
 
             daftar_num_cols = ["age", "bp", "sg", "al", "su", "bgr", "bu", "sc", "sod", "pot", "hemo", "pcv", "wbcc",
                                "rbcc"]  # untuk cek outlier
-            num_cols = [i for i in data.col if i in daftar_num_cols]
+            num_cols = [i for i in data.cols if i in daftar_num_cols]
             numeric_df = data.dataset_df[num_cols]
             pencilan_df = outliers(numeric_df)
             filtered_df = outliers_removing(data.dataset_df, pencilan_df)
             dataset_df = filtered_df
             data.dataset_df = dataset_df
 
-        #     TAHAP3 TRANSFORMASI DATA
-        daftar_col_nominal = ["rbc", "pc", "pcc", "ba", "htn", "dm", "cad", "appet", "pe", "ane"]  # untuk transformasi
-        col_nominal = [i for i in data.col if i in daftar_col_nominal]
 
+        #     TAHAP3 TRANSFORMASI DATA
+        data.dict_tahap_demo['3'] = "Transformasi Data"
+        daftar_col_nominal = ["rbc", "pc", "pcc", "ba", "htn", "dm", "cad", "appet", "pe", "ane"]  # untuk transformasi
+        col_nominal = [i for i in data.cols if i in daftar_col_nominal]
+        col_nominal.append("class")
         cut_df_id = data.dataset_df["id"]
-        cut_df_col = data.dataset_df[data.col]
+        cut_df_col = data.dataset_df[data.cols]
         cut_df_class = data.dataset_df["class"]
         cut_df = pd.concat([cut_df_id, cut_df_col, cut_df_class], axis=1)
-        encoding_df = encoding(cut_df, all_nominal=col_nominal)
+        encoding_df = encoding(cut_df, cols=col_nominal)
         data.dataset_df = encoding_df
+
 
         #     TAHAP4 PENANGANAN MISSING VALUE
         data.dict_tahap_demo['4'] = "Penanganan Missing Value"
-        missing_handling_df = missing_handling(data.dataset_df, all_col=data.col)
+        missing_handling_df = missing_handling(data.dataset_df, cols=data.cols)
         data.dataset_df = missing_handling_df
 
-        print('normalisasi')
-        print(request.form.get('norm', False) != False)
+
         #     TAHAP 5 NORMALISASI
         if request.form.get('norm', False) != False:
             data.dict_tahap_demo['5'] = "Normalisasi"
-            normalizing_df = normalizing(data.dataset_df, all_col=data.col)
+            normalizing_df = normalizing(data.dataset_df, cols=data.cols)
             data.dataset_df = normalizing_df
 
-        #   TAHAP 6 PREDIKSI
-        data.k_temp = int(request.form['kNN'])
-        print('kNN')
-        print(int(request.form['kNN']))
-        data.dict_tahap_demo['6'] = "Prediksi kNN, k= " + str(data.k_temp)
+
+        #   TAHAP 6 BACKWARD ELIMINATION
+        tahapan = request.form['atribut']
+        if tahapan == "tanpa":
+            tahap = "Tanpa seleksi fitur"
+        elif tahapan == "be_1":
+            sl = 0.1
+        elif tahapan == "be_05":
+            sl = 0.05
+
         cut_df_id = data.dataset_df["id"]
-        cut_df_col = data.dataset_df[data.col]
+        cut_df_cols = data.dataset_df[data.cols]
         cut_df_class = data.dataset_df["class"]
-        cut_df = pd.concat([cut_df_col, cut_df_class], axis=1)
+        backwarding_df = backward_elimination(cut_df_cols, cut_df_class,sl=sl)
+        backward_df = pd.concat([cut_df_id, backwarding_df], axis=1)
+        data.cols = list(backward_df)
+        data.cols.remove('id')
+        data.cols.remove('class')
+        print("co")
+        print(data.cols)
+
+        if tahapan == "tanpa":
+            tahap = "Tanpa seleksi fitur"
+        elif tahapan == "be_1":
+            atribut_akhir = "Atribut hasil Backward Elimination, α = 0.1: " + ', '.join(data.cols)
+        elif tahapan == "be_05":
+            atribut_akhir = "Atribut hasil Backward Elimination, α = 0.05: " + ', '.join(data.cols)
+
+        data.dict_tahap_demo['6'] = atribut_akhir
+        data.dataset_df = backward_df
+
+
+        #   TAHAP 7 PREDIKSI
+        data.k_temp = int(request.form['kNN'])
+        data.dict_tahap_demo['7'] = "Prediksi kNN, k= " + str(data.k_temp)
+        cut_df_id = data.dataset_df["id"]
+        cut_df_col = data.dataset_df[data.cols]
+        cut_df_class = data.dataset_df["class"]
+        cut_df = pd.concat([cut_df_id, cut_df_col, cut_df_class], axis=1)
+        print("cut")
+        print(cut_df)
+        np.set_printoptions(threshold=np.nan)
 
         start_time = time.time()
         confusion, akurasi, sensitifity, specificity = knn_kfold(cut_df, arr_akurasi=1, kNN=data.k_temp)
@@ -604,18 +643,18 @@ def langsung1():
 def pemodelan_manual():
     data.dict_tahap_demo = {}
     rule = request.url_rule.rule
-    data.col = []
+    data.cols = []
     return render_template("pemodelan_manual.html", rule=rule, title="Pemodelan Manual")
 
 
 @app.route('/manual1', methods=['GET', 'POST'])
 def render_1():
-    data.col, data.dict_tahap_demo['1'] = demo_1send()
+    data.cols, data.dict_tahap_demo['1'] = demo_1send()
     data.dataset_df = dataset()
-    if len(data.col) == 0:
+    if len(data.cols) == 0:
         return redirect("pemodelan_manual")
     df_id = data.dataset_df["id"]
-    df_col = data.dataset_df[data.col]
+    df_col = data.dataset_df[data.cols]
     df_class = data.dataset_df["class"]
     data.dataset_df = pd.concat([df_id, df_col, df_class], axis=1)
 
@@ -703,7 +742,7 @@ def demo_2send():
 
     daftar_num_cols = ["age", "bp", "sg", "al", "su", "bgr", "bu", "sc", "sod", "pot", "hemo", "pcv", "wbcc",
                        "rbcc"]  # untuk cek outlier
-    num_cols = [i for i in data.col if i in daftar_num_cols]
+    num_cols = [i for i in data.cols if i in daftar_num_cols]
     numeric_df = data.dataset_df[num_cols]
     pencilan_df = outliers(numeric_df)
     filtered_df = outliers_removing(data.dataset_df, pencilan_df)
@@ -726,10 +765,10 @@ def render_3():
 def demo_3send():
     data.dict_tahap_demo['3'] = "Transformasi Nominal Menjadi Numerik"
     daftar_col_nominal = ["rbc", "pc", "pcc", "ba", "htn", "dm", "cad", "appet", "pe", "ane"]  # untuk transformasi
-    col_nominal = [i for i in data.col if i in daftar_col_nominal]
+    col_nominal = [i for i in data.cols if i in daftar_col_nominal]
 
     cut_df_id = data.dataset_df["id"]
-    cut_df_col = data.dataset_df[data.col]
+    cut_df_col = data.dataset_df[data.cols]
     cut_df_class = data.dataset_df["class"]
     cut_df = pd.concat([cut_df_id, cut_df_col, cut_df_class], axis=1)
 
@@ -750,7 +789,7 @@ def render_4():
 
 def demo_4send():
     data.dict_tahap_demo['4'] = "Penanganan Missing Value"
-    missing_handling_df = missing_handling(data.dataset_df, all_col=data.col)
+    missing_handling_df = missing_handling(data.dataset_df, all_col=data.cols)
     return missing_handling_df
 
 
@@ -761,7 +800,7 @@ def demo_4send():
 @app.route('/manual5')
 def render_5():
     data.dict_tahap_demo['5'] = "Normalisasi"
-    normalizing_df = normalizing(data.dataset_df, all_col=data.col)
+    normalizing_df = normalizing(data.dataset_df, all_col=data.cols)
     data.dataset_df = normalizing_df
     return render_template("manual5.html", terbaik=data.terbaik, df=data.dataset_df, shape=data.dataset_df.shape,
                            rule='/pemodelan_manual', title='Pemodelan Manual')
@@ -778,7 +817,7 @@ def render_6():
     data.dict_tahap_demo['6'] = "Prediksi kNN, k= " + str(data.k_temp)
 
     cut_df_id = data.dataset_df["id"]
-    cut_df_col = data.dataset_df[data.col]
+    cut_df_col = data.dataset_df[data.cols]
     cut_df_class = data.dataset_df["class"]
     cut_df = pd.concat([cut_df_col, cut_df_class], axis=1)
 
@@ -811,17 +850,16 @@ def demo_6send():
 def simpan():
     data.simpan = True
     data.dict_tahap_simpan = data.dict_tahap_demo.copy()
-    data.dict_tahap_simpan['1'] = "Atribut: " + ', '.join(data.col)
     data.k_simpan = data.k_temp
-    data.col_simpan = data.col
+    data.cols_simpan = data.cols
     return redirect("identifikasi")
 
 
 @app.route('/reset')
 def reset():
     data.simpan = False
-    data.col = data.col_def
-    data.dict_tahap_default['1'] = "Atribut: " + ', '.join(data.col_def)
+    data.cols = data.cols_def
+    data.dict_tahap_default['1'] = "Atribut: " + ', '.join(data.cols_def)
     return redirect("identifikasi")
 
 

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Deteksi Penyakit Ginjal Kronis</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- MaterializeJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+
+</head>
+<body>
+<header>
+    <nav style="height: 110px" class="blue-text white fixed">
+        <div class="nav-wrapper valign-wrapper">
+            <div class="row">
+                <h2>{{ title }}</h2>
+            </div>
+        </div>
+    </nav>
+
+    <style>
+        header, main, footer {
+            padding-left: 300px;
+        }
+    </style>
+
+    <ul id="slide-out" class="sidenav sidenav-fixed">
+        <div class="row">
+            <div class="center">
+                <object style="padding-top: 10px;" id="front-page-logo" type="image/png"
+                        data="static/asset_img/ginjal.png" width="100px"
+                        height="110px">
+                </object>
+                <h6 class="blue-text">Identifikasi Penyakit Ginjal Kronis</h6>
+            </div>
+            <div class="divider"></div>
+        </div>
+
+        <li {% if rule=='/' %} class="active blue" {% endif %}>
+            <a {% if rule=='/' %} class="white-text" {% endif %} href="/">Home</a>
+        </li>
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+                <li {% if rule=='/pemodelan_manual' or '/pemodelan_langsung' %} class="active" {% endif %}>
+                    <a class="collapsible-header" style="padding-left: 30px">Pemodelan</a>
+                    <div class="collapsible-body">
+                        <ul style="padding-left: 15px">
+                            <li {% if rule=='/pemodelan_langsung' %} class="active blue" {% endif %}><a
+                                    {% if rule=='/pemodelan_langsung' %} class="white-text" {% endif %}
+                                                                       href="pemodelan_langsung">Langsung</a></li>
+                            <li {% if rule=='/pemodelan_manual' %} class="active blue" {% endif %}>
+                                <a {% if rule=='/pemodelan_manual' %} class="white-text" {% endif %}
+                                                                      href="pemodelan_manual">Manual</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li {% if rule=='/identifikasi' or rule=='/send' %} class="active blue" {% endif %}>
+            <a {% if rule=='/identifikasi' or rule=='/send' %} class="white-text" {% endif %} href="/identifikasi">Identifikasi</a>
+        </li>
+    </ul>
+
+</header>

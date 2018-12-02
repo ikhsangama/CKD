@@ -48,17 +48,15 @@
             <a {% if rule=='/' %} class="white-text" {% endif %} href="/">Home</a>
         </li>
         <li class="no-padding">
-            <ul class="collapsible collapsible-accordion">
-                <li {% if rule=='/pemodelan_manual' or '/pemodelan_langsung' %} class="active" {% endif %}>
-                    <a class="collapsible-header" style="padding-left: 30px">Pemodelan</a>
-                    <div class="collapsible-body">
+            <ul>
+                <li>
+                    <a  {% if rule=='/pemodelan_langsung' %} class="blue white-text" {% endif %}
+                                                             style="padding-left: 30px" href="pemodelan_langsung">Pemodelan</a>
+                    <div>
                         <ul style="padding-left: 15px">
-                            <li {% if rule=='/pemodelan_langsung' %} class="active blue" {% endif %}><a
-                                    {% if rule=='/pemodelan_langsung' %} class="white-text" {% endif %}
-                                                                       href="pemodelan_langsung">Langsung</a></li>
                             <li {% if rule=='/pemodelan_manual' %} class="active blue" {% endif %}>
                                 <a {% if rule=='/pemodelan_manual' %} class="white-text" {% endif %}
-                                                                      href="pemodelan_manual">Manual</a>
+                                                                      href="pemodelan_manual">•Per-tahapan</a>
                             </li>
                         </ul>
                     </div>

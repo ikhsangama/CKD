@@ -12,22 +12,14 @@
                     Pilih Atribut
                 </h3></blockquote>
 
-                <label>
-                    <input id="custom" name="atribut" type="radio" value="cust"/>
-                    <span class="black-text">Custom</span>
-                </label>
-                <label>
-                    <input id="back1" name="atribut" type="radio" checked value="be1"/>
-                    <span class="black-text">Backward Elimination, α = 0.1</span>
-                </label>
-                <label>
-                    <input id="back2" name="atribut" type="radio" value="be2"/>
-                    <span class="black-text">Backward Elimination, α = 0.05</span>
-                </label>
-                <label>
-                    <input id="all" name="atribut" type="radio" value="all"/>
-                    <span class="black-text">Semua Atribut</span>
-                </label>
+                <div class="switch">
+                    <label>
+                        Custom
+                        <input id="semua_atr" type="checkbox">
+                        <span class="lever"></span>
+                        Semua Atribut
+                    </label>
+                </div>
 
             </div>
             <div class="divider"></div>
@@ -351,12 +343,23 @@
                             <div class="col s3">
                                 <p>
                                     <label>
-                                        <input type="checkbox" name="norm"/>
+                                        <input type="checkbox" name="norm" checked/>
                                         <span class="black-text">Normalisasi</span>
                                     </label>
                                 </p>
                             </div>
+
                             <div class="col s12 divider"></div>
+
+                            <div class="input-field col s6">
+                                <select name="atribut">
+                                    <option value="be_05" selected>Backward Elimination, α = 0.05</option>
+                                    <option value="be_1">Backward Elimination, α = 0.1</option>
+                                    <option value="tanpa">Tanpa Seleksi Atribut</option>
+                                </select>
+                                <label for="appet">Seleksi Atribut</label>
+                            </div>
+
                             <div class="col s3">
                                 <div class="input-field">
                                     <input name="kNN" id="kNN" type="number" class="validate" min="3" step="2" max="99"
@@ -367,15 +370,15 @@
                                           data-success="Rekomendasi k pada kNN: 5">Min: 3, Max: 99</span>
                                 </div>
                             </div>
+                            <div class="col s12 divider"></div>
+                            <div class="col s3 ">
+                                <input class="btn btn-primary" type="submit" value="submit">
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col s12 ">
-                        <input class="btn btn-primary" type="submit" value="submit">
-                    </div>
-                </div>
+
             </div>
         </form>
     </div>
@@ -384,26 +387,16 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#custom').click(function () {
-            $("input.cust0").prop('checked', !this.checked);
-        });
 
-        $('#back1').click(function () {
-            $("input.cust0").prop('checked', !this.checked);
-            $("input.backed1").prop('checked', this.checked);
-        });
-
-        $('#back2').click(function () {
-            $("input.cust0").prop('checked', !this.checked);
-            $("input.backed2").prop('checked', this.checked);
-        });
-
-        $('#all').click(function () {
+        $('#semua_atr').click(function () {
             $("input.cust0").prop('checked', this.checked);
         });
+
+        $('#semua_atr').click();
+
         $("input[type='checkbox']").click(function () {
             console.log('ganti');
-            $("input[name='atribut'][value='0']").prop("checked", true);
+            $('#semua_atr').toggle("checked", true);
         });
 
     });
