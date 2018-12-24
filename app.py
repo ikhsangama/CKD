@@ -300,27 +300,6 @@ def find_best_knn(df, start=3, finish=16, step=2, graph=True):
     return akurasi
 
 
-import statsmodels.formula.api as sm
-
-
-def backward_elimination(splitdf_x, splitdf_y, sl=0.05):
-    sl_ = sl
-    copy_df = splitdf_x.copy()
-    reg_ols = sm.OLS(endog=splitdf_y, exog=copy_df).fit()
-    pval = reg_ols.pvalues
-    maks_pval = max(pval)
-
-    if (maks_pval >= sl_):
-        delete_col = pval[pval == maks_pval].index[0]
-        drp = [delete_col]
-        copy_df = copy_df.drop(drp, axis=1)
-        copy_df = backward_elimination(copy_df, splitdf_y, sl_)
-
-    else:
-        copy_df = pd.concat([copy_df, splitdf_y], axis=1)
-    return copy_df
-
-
 # CLASS PUBLIC DATASTORE
 class DataStore():
     terbaik = False
@@ -329,13 +308,13 @@ class DataStore():
     dict_tahap_demo = {}
 
     cols = []
-    cols_def = ["bp", "sg", "al", "bgr", "bu", "sc", "sod", "hemo", "rbc", "htn", "dm", "appet"]
+    cols_def = ["sg", "al", "bu", "sc", "sod", "hemo", "rbc", "htn", "dm", "appet"]
     cols_simpan = []
 
     simpan = False
     dict_tahap_simpan = {}
     dict_tahap_default = {
-        '1': ["bp", "sg", "al", "bgr", "bu", "sc", "sod", "hemo", "rbc", "htn", "dm", "appet"],
+        '1': cols_def,
         '2': None,
         '3': "Transformasi Nominal Menjadi Numerik",
         '4': "Penanganan Missing Value",
@@ -367,11 +346,11 @@ def index():
     rule = request.url_rule.rule
     class_counts = data.dataset_df["class"].value_counts()
     return render_template('index.html', class_counts=class_counts, rule=rule,
-                           title="Identifikasi Penyakit Ginjal Kronis")
+                           title="Deteksi Penyakit Ginjal Kronis")
 
 
-@app.route('/identifikasi')
-def identifikasi():
+@app.route('/deteksi')
+def deteksi():
     rule = request.url_rule.rule
     if(data.simpan):
         tahap = data.dict_tahap_simpan
@@ -381,7 +360,7 @@ def identifikasi():
         tahap = data.dict_tahap_default
         atribut = data.cols_def
 
-    return render_template('identifikasi.html', title="Identifikasi Pasien", rule=rule, tahap=tahap, atribut=atribut)
+    return render_template('deteksi.html', title="Deteksi Pasien", rule=rule, tahap=tahap, atribut=atribut)
 
 
 @app.route('/send', methods=['GET', 'POST'])
@@ -405,8 +384,12 @@ def send():
         array_p = np.array(l1)
         p_df = pd.DataFrame(array_p.reshape(1, -1), columns=cols)
         dataset_df = dataset()
-        cut_df = dataset_df[cols]  # membuang kolom id dan kelas
-        inputed_df = cut_df.append(p_df, ignore_index=True)
+        cut_df_id = dataset_df["id"]
+        cut_df_cols = dataset_df[cols]  # membuang kolom id dan kelas
+        cut_df_class = dataset_df["class"]
+        inputed_df = cut_df_cols.append(p_df, ignore_index=True)
+        print("inputeddf")
+        print(inputed_df)
         # .MENGAMBIL INPUT SEBAGAI DF DAN MENGGABUNGKAN DENGAN TRAINING DF ATRIBUT TERBAIK
         # TRANSFORMASI & NORMALISASI INPUT
         new_point, points = best_attribute_training(inputed_df, cols=cols)
@@ -425,7 +408,7 @@ def send():
 
         rule = request.url_rule.rule
     return render_template('output.html', hasil=hasil, nama=nama, itr=itr, atribut=cols, list=l1,
-                           title="Hasil Identifikasi", rule=rule)
+                           title="Hasil Deteksi", rule=rule)
 
 
 def best_attribute_training(dataset, cols=['sg', 'al', 'bu', 'sc', 'sod', 'hemo', 'rbc', 'htn', 'dm', 'appet']):
@@ -474,7 +457,7 @@ def pemodelan_langsung():
     rule = request.url_rule.rule
     data.dataset_df = dataset()
     data.cols = []
-    return render_template("pemodelan_langsung.html", rule=rule, title="Pemodelan Langsung")
+    return render_template("pemodelan_langsung.html", rule=rule, title="Pemodelan")
 
 
 @app.route('/langsung1', methods=['GET','POST'])
@@ -583,33 +566,28 @@ def langsung1():
 
         #   TAHAP 6 BACKWARD ELIMINATION
         tahapan = request.form['atribut']
-        if tahapan == "tanpa":
-            tahap = "Tanpa seleksi fitur"
-        elif tahapan == "be_1":
-            sl = 0.1
-        elif tahapan == "be_05":
-            sl = 0.05
+        if tahapan!= "tanpa":
+            if tahapan == "be_1":
+                sl = 0.1
+            elif tahapan == "be_05":
+                sl = 0.05
 
-        cut_df_id = data.dataset_df["id"]
-        cut_df_cols = data.dataset_df[data.cols]
-        cut_df_class = data.dataset_df["class"]
-        backwarding_df = backward_elimination(cut_df_cols, cut_df_class,sl=sl)
-        backward_df = pd.concat([cut_df_id, backwarding_df], axis=1)
-        data.cols = list(backward_df)
-        data.cols.remove('id')
-        data.cols.remove('class')
-        print("co")
-        print(data.cols)
+            cut_df_id = data.dataset_df["id"]
+            cut_df_cols = data.dataset_df[data.cols]
+            cut_df_class = data.dataset_df["class"]
+            backwarding_df = backward_elimination(cut_df_cols, cut_df_class,sl=sl)
+            backward_df = pd.concat([cut_df_id, backwarding_df], axis=1)
+            data.cols = list(backward_df)
+            data.cols.remove('id')
+            data.cols.remove('class')
 
-        if tahapan == "tanpa":
-            tahap = "Tanpa seleksi fitur"
-        elif tahapan == "be_1":
-            atribut_akhir = "Atribut hasil Backward Elimination, α = 0.1: " + ', '.join(data.cols)
-        elif tahapan == "be_05":
-            atribut_akhir = "Atribut hasil Backward Elimination, α = 0.05: " + ', '.join(data.cols)
+            if tahapan == "be_1":
+                atribut_akhir = "Atribut hasil Backward Elimination, α = 0.1: " + ', '.join(data.cols)
+            elif tahapan == "be_05":
+                atribut_akhir = "Atribut hasil Backward Elimination, α = 0.05: " + ', '.join(data.cols)
 
-        data.dict_tahap_demo['6'] = atribut_akhir
-        data.dataset_df = backward_df
+            data.dict_tahap_demo['6'] = atribut_akhir
+            data.dataset_df = backward_df
 
 
         #   TAHAP 7 PREDIKSI
@@ -619,9 +597,9 @@ def langsung1():
         cut_df_col = data.dataset_df[data.cols]
         cut_df_class = data.dataset_df["class"]
         cut_df = pd.concat([cut_df_id, cut_df_col, cut_df_class], axis=1)
+        np.set_printoptions(threshold=np.nan)
         print("cut")
         print(cut_df)
-        np.set_printoptions(threshold=np.nan)
 
         start_time = time.time()
         confusion, akurasi, sensitifity, specificity = knn_kfold(cut_df, arr_akurasi=1, kNN=data.k_temp)
@@ -636,7 +614,7 @@ def langsung1():
                                akurasi=akurasi,
                                sensitifity=sensitifity, specificity=specificity, m_akurasi=m_akurasi,
                                m_sensitifity=m_sensitifity,
-                               m_specificity=m_specificity, rule='/pemodelan_langsung', title='Pemodelan Langsung')
+                               m_specificity=m_specificity, rule='/pemodelan_langsung', title='Pemodelan')
 
 
 @app.route('/pemodelan_manual')
@@ -852,7 +830,7 @@ def simpan():
     data.dict_tahap_simpan = data.dict_tahap_demo.copy()
     data.k_simpan = data.k_temp
     data.cols_simpan = data.cols
-    return redirect("identifikasi")
+    return redirect("deteksi")
 
 
 @app.route('/reset')
@@ -860,7 +838,7 @@ def reset():
     data.simpan = False
     data.cols = data.cols_def
     data.dict_tahap_default['1'] = "Atribut: " + ', '.join(data.cols_def)
-    return redirect("identifikasi")
+    return redirect("deteksi")
 
 
 if __name__ == '__main__':

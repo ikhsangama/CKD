@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app.py" description=")" line="699" />
+    <bookmark url="file://$PROJECT_DIR$/app.py" description=")" line="677" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1958f2f-eff8-425f-8d45-3a5f98907fdb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/_header.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/_pemodelan_langsung.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/_app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/output.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/output.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/identifikasi.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/deteksi.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/pemodelan_langsung.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pemodelan_langsung.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,7 +20,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/CKD$CKD.coverage" NAME="CKD Coverage Results" MODIFIED="1543755022879" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CKD$CKD.coverage" NAME="CKD Coverage Results" MODIFIED="1545640495303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -37,79 +36,28 @@
     <expand />
     <select />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-688461857">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="19" />
-          <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.12" value="1" />
-          <entry key="project.open.time.13" value="1" />
-          <entry key="project.open.time.14" value="2" />
-          <entry key="project.open.time.15" value="1" />
-          <entry key="project.open.time.16" value="4" />
-          <entry key="project.open.time.17" value="1" />
-          <entry key="project.open.time.18" value="1" />
-          <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.20" value="6" />
-          <entry key="project.open.time.22" value="3" />
-          <entry key="project.open.time.24" value="1" />
-          <entry key="project.open.time.27" value="1" />
-          <entry key="project.open.time.36" value="1" />
-          <entry key="project.opened" value="25" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="Python Console" value="32" />
-          <entry key="dummy" value="2" />
-          <entry key="html" value="20280" />
-          <entry key="py" value="15203" />
-          <entry key="txt" value="30" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="HTML" value="20814" />
-          <entry key="PLAIN_TEXT" value="32" />
-          <entry key="Python" value="16428" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="HTML" value="178" />
-          <entry key="IPNB" value="5" />
-          <entry key="JavaScript" value="1" />
-          <entry key="Python" value="24" />
-          <entry key="RNG Compact" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.js.language.service.starts" />
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="html" value="167" />
-          <entry key="ipynb" value="5" />
-          <entry key="js" value="1" />
-          <entry key="py" value="24" />
-          <entry key="rnc" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.vcs.git.usages" />
-    </session>
-  </component>
   <component name="FavoritesManager">
     <favorites_list name="CKD" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="true" current-in-tab="true">
+      <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="422" column="19" selection-start-line="422" selection-start-column="19" selection-end-line="422" selection-end-column="19" />
+            <state relative-caret-position="6885">
+              <caret line="410" column="47" selection-start-line="410" selection-start-column="47" selection-end-line="410" selection-end-column="47" />
               <folding>
-                <marker date="1543757754851" expanded="true" signature="29195:29579" ph="..." />
+                <marker date="1544711327267" expanded="true" signature="28553:28927" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/deteksi.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3298">
+              <caret line="194" column="75" selection-start-line="194" selection-start-column="75" selection-end-line="194" selection-end-column="75" />
             </state>
           </provider>
         </entry>
@@ -117,23 +65,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/header.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="552">
-              <caret line="55" column="51" selection-start-line="55" selection-start-column="51" selection-end-line="55" selection-end-column="51" />
-              <folding>
-                <element signature="n#style#0;n#a#0;n#li#0;n#ul#0;n#li#1;n#ul#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="1122">
+              <caret line="66" column="112" selection-start-line="66" selection-start-column="112" selection-end-line="66" selection-end-column="112" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/pemodelan_langsung.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="59">
-              <caret line="356" column="55" selection-start-line="356" selection-start-column="55" selection-end-line="356" selection-end-column="55" />
-              <folding>
-                <element signature="n#style#0;n#blockquote#0;n#div#0;n#form#0;n#div#0;n#main#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="132">
+              <caret line="398" column="18" selection-start-line="398" selection-start-column="18" selection-end-line="398" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -141,8 +83,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/output.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1836">
-              <caret line="120" column="26" lean-forward="true" selection-start-line="120" selection-start-column="26" selection-end-line="120" selection-end-column="26" />
+            <state relative-caret-position="2040">
+              <caret line="120" column="26" selection-start-line="120" selection-start-column="26" selection-end-line="120" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -150,7 +92,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/demo_6.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
+            <state relative-caret-position="272">
               <caret line="16" column="38" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
             </state>
           </provider>
@@ -159,8 +101,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/manual6.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="98" column="60" lean-forward="true" selection-start-line="98" selection-start-column="60" selection-end-line="98" selection-end-column="60" />
+            <state relative-caret-position="1666">
+              <caret line="98" column="60" selection-start-line="98" selection-start-column="60" selection-end-line="98" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -170,9 +112,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
               <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-              <folding>
-                <element signature="n#style#0;n#canvas#0;n#div#0;n#div#1;n#div#0;n#main#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -189,7 +128,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>pemodel</find>
       <find>ident</find>
       <find>sc</find>
       <find>data</find>
@@ -217,8 +155,9 @@
       <find>data.c</find>
       <find>data.cols</find>
       <find>cols</find>
-      <find>identifikasi</find>
       <find>simpan</find>
+      <find>title</find>
+      <find>identifikasi</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -255,18 +194,13 @@
         <option value="$PROJECT_DIR$/templates/identifikasi.html" />
         <option value="$PROJECT_DIR$/templates/pemodelan_manual.html" />
         <option value="$PROJECT_DIR$/templates/index.html" />
-        <option value="$PROJECT_DIR$/templates/header.html" />
-        <option value="$PROJECT_DIR$/templates/pemodelan_langsung.html" />
         <option value="$PROJECT_DIR$/templates/output.html" />
+        <option value="$PROJECT_DIR$/templates/pemodelan_langsung.html" />
+        <option value="$PROJECT_DIR$/templates/header.html" />
         <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/templates/deteksi.html" />
       </list>
     </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="493" />
@@ -294,7 +228,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -322,6 +255,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -375,8 +309,6 @@
       <method v="2" />
     </configuration>
     <configuration name="CKD" type="Python.FlaskServer" factoryName="Flask server">
-      <option name="additionalOptions" value="" />
-      <option name="application" value="" />
       <option name="flaskDebug" value="true" />
       <module name="CKD" />
       <option name="target" value="$PROJECT_DIR$/app.py" />
@@ -403,6 +335,14 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1537975663320</updated>
+      <workItem from="1543927239002" duration="1453000" />
+      <workItem from="1543979963566" duration="1407000" />
+      <workItem from="1544021223950" duration="2313000" />
+      <workItem from="1544388331218" duration="51000" />
+      <workItem from="1544388499588" duration="595000" />
+      <workItem from="1544466181124" duration="1305000" />
+      <workItem from="1544702334797" duration="4002000" />
+      <workItem from="1545639026455" duration="621000" />
     </task>
     <task id="LOCAL-00001" summary="11-6-2018 Siap ganti interface">
       <created>1541472664692</created>
@@ -413,6 +353,9 @@
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="11747000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -427,13 +370,13 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49726775" visible="true" weight="0.19894099" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49726775" visible="true" weight="0.22919819" />
       <window_info id="Structure" order="1" sideWeight="0.5027322" side_tool="true" weight="0.32526475" />
       <window_info id="Favorites" order="2" sideWeight="0.5027322" side_tool="true" weight="0.32526475" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32786885" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49848714" weight="0.27377048" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4977307" visible="true" weight="0.2672131" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32733223" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49848714" visible="true" weight="0.27332243" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4977307" weight="0.2667758" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3295082" />
@@ -454,9 +397,6 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
@@ -472,13 +412,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/pycharm.jar!/resources/html5-schema/html5/web-forms.rnc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="205" column="22" selection-start-line="205" selection-start-column="22" selection-end-line="205" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/pycharm.jar!/resources/html5-schema/html5/web-forms.rnc" />
     <entry file="file://$USER_HOME$/a_JupyterNotebook/00 - Master Ver.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -527,13 +461,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/pycharm.jar!/resources/html5-schema/html5/common.rnc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="125" column="9" lean-forward="true" selection-start-line="125" selection-end-line="126" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/pycharm.jar!/resources/html5-schema/html5/common.rnc" />
     <entry file="file://$PROJECT_DIR$/templates/_index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -608,13 +536,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/identifikasi.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="51" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/_pemodelan_langsung.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -646,23 +567,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/demo_6.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="16" column="38" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-          <folding>
-            <element signature="n#style#0;n#canvas#0;n#div#0;n#div#1;n#div#0;n#main#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/_header.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -680,47 +584,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/pemodelan_langsung.html">
+    <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="356" column="55" selection-start-line="356" selection-start-column="55" selection-end-line="356" selection-end-column="55" />
+        <state relative-caret-position="6885">
+          <caret line="410" column="47" selection-start-line="410" selection-start-column="47" selection-end-line="410" selection-end-column="47" />
           <folding>
-            <element signature="n#style#0;n#blockquote#0;n#div#0;n#form#0;n#div#0;n#main#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1544711327267" expanded="true" signature="28553:28927" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/deteksi.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3298">
+          <caret line="194" column="75" selection-start-line="194" selection-start-column="75" selection-end-line="194" selection-end-column="75" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/header.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="55" column="51" selection-start-line="55" selection-start-column="51" selection-end-line="55" selection-end-column="51" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#li#0;n#ul#0;n#li#1;n#ul#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/manual6.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="98" column="60" lean-forward="true" selection-start-line="98" selection-start-column="60" selection-end-line="98" selection-end-column="60" />
+        <state relative-caret-position="1122">
+          <caret line="66" column="112" selection-start-line="66" selection-start-column="112" selection-end-line="66" selection-end-column="112" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/output.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1836">
-          <caret line="120" column="26" lean-forward="true" selection-start-line="120" selection-start-column="26" selection-end-line="120" selection-end-column="26" />
+        <state relative-caret-position="2040">
+          <caret line="120" column="26" selection-start-line="120" selection-start-column="26" selection-end-line="120" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.py">
+    <entry file="file://$PROJECT_DIR$/templates/demo_6.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="422" column="19" selection-start-line="422" selection-start-column="19" selection-end-line="422" selection-end-column="19" />
-          <folding>
-            <marker date="1543757754851" expanded="true" signature="29195:29579" ph="..." />
-          </folding>
+        <state relative-caret-position="272">
+          <caret line="16" column="38" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/manual6.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1666">
+          <caret line="98" column="60" selection-start-line="98" selection-start-column="60" selection-end-line="98" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/pemodelan_langsung.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="398" column="18" selection-start-line="398" selection-start-column="18" selection-end-line="398" selection-end-column="18" />
         </state>
       </provider>
     </entry>

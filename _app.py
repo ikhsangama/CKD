@@ -334,9 +334,9 @@ def index():
     return render_template('index.html', class_counts=class_counts, rule=rule)
 
 
-@app.route('/identifikasi.html')
+@app.route('/deteksi.html')
 def identifikasi():
-    return render_template('identifikasi.html')
+    return render_template('deteksi.html')
 
 
 @app.route('/send', methods=['GET', 'POST'])

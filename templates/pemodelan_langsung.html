@@ -392,6 +392,15 @@
             $("input.cust0").prop('checked', this.checked);
         });
 
+
+        $("input.cust0").change(function () {
+            if ($('input.cust0:checked').length == $('input.cust0').length) {
+                $("#semua_atr").prop('checked', true);
+            }else{
+                $("#semua_atr").prop('checked', false);
+            }
+        })
+
         $('#semua_atr').click();
 
         $("input[type='checkbox']").click(function () {
