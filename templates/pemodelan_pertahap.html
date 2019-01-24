@@ -6,28 +6,20 @@
 
 <main>
     <div class="card-panel">
-        <form action="http://127.0.0.1:5000/manual1" method="POST">
+        <form action="http://127.0.0.1:5000/tahap1" method="POST">
             <div class="row">
                 <blockquote style="border-left: 5px solid #2196f3 ;"><h3>
                     Pilih Atribut
                 </h3></blockquote>
 
-                <label>
-                    <input id="custom" name="atribut" type="radio" value="cust"/>
-                    <span class="black-text">Custom</span>
-                </label>
-                <label>
-                    <input id="back1" name="atribut" type="radio" checked value="be1"/>
-                    <span class="black-text">Backward Elimination, α = 0.1</span>
-                </label>
-                <label>
-                    <input id="back2" name="atribut" type="radio" value="be2"/>
-                    <span class="black-text">Backward Elimination, α = 0.05</span>
-                </label>
-                <label>
-                    <input id="all" name="atribut" type="radio" value="all"/>
-                    <span class="black-text">Semua Atribut</span>
-                </label>
+                <div class="switch">
+                    <label>
+                        Custom
+                        <input id="semua_atr" type="checkbox">
+                        <span class="lever"></span>
+                        Semua Atribut
+                    </label>
+                </div>
 
             </div>
             <div class="divider"></div>
@@ -314,12 +306,20 @@
                         </tbody>
                     </table>
                 </div>
+
                 <div class="row">
-                    <div class="col s12 ">
-                        <br>
-                        <input class="btn btn-primary" type="submit" value="submit">
+                    <div class="col s12">
+                        <div class="row">
+                            <br>
+{#                            <div class="col s12 divider"></div>#}
+                            <div class="col s3 ">
+                                <input class="btn btn-primary" type="submit" value="submit">
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
         </form>
     </div>
@@ -328,26 +328,25 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#custom').click(function () {
-            $("input.cust0").prop('checked', !this.checked);
-        });
 
-        $('#back1').click(function () {
-            $("input.cust0").prop('checked', !this.checked);
-            $("input.backed1").prop('checked', this.checked);
-        });
-
-        $('#back2').click(function () {
-            $("input.cust0").prop('checked', !this.checked);
-            $("input.backed2").prop('checked', this.checked);
-        });
-
-        $('#all').click(function () {
+        $('#semua_atr').click(function () {
             $("input.cust0").prop('checked', this.checked);
         });
+
+
+        $("input.cust0").change(function () {
+            if ($('input.cust0:checked').length == $('input.cust0').length) {
+                $("#semua_atr").prop('checked', true);
+            } else {
+                $("#semua_atr").prop('checked', false);
+            }
+        })
+
+        $('#semua_atr').click();
+
         $("input[type='checkbox']").click(function () {
             console.log('ganti');
-            $("input[name='atribut'][value='0']").prop("checked", true);
+            $('#semua_atr').toggle("checked", true);
         });
 
     });

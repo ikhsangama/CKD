@@ -617,102 +617,98 @@ def langsung1():
                                m_specificity=m_specificity, rule='/pemodelan_langsung', title='Pemodelan')
 
 
-@app.route('/pemodelan_manual')
-def pemodelan_manual():
+@app.route('/pemodelan_pertahap')
+def pemodelan_pertahap():
     data.dict_tahap_demo = {}
     rule = request.url_rule.rule
     data.cols = []
-    return render_template("pemodelan_manual.html", rule=rule, title="Pemodelan Manual")
+    return render_template("pemodelan_pertahap.html", rule=rule, title="Pemodelan Per-tahapan")
 
 
-@app.route('/manual1', methods=['GET', 'POST'])
+@app.route('/tahap1', methods=['GET', 'POST'])
 def render_1():
     data.cols, data.dict_tahap_demo['1'] = demo_1send()
     data.dataset_df = dataset()
     if len(data.cols) == 0:
-        return redirect("pemodelan_manual")
+        return redirect("pemodelan_pertahap")
     df_id = data.dataset_df["id"]
     df_col = data.dataset_df[data.cols]
     df_class = data.dataset_df["class"]
     data.dataset_df = pd.concat([df_id, df_col, df_class], axis=1)
 
-    return render_template("manual1.html", shape=data.dataset_df.shape, df=data.dataset_df, rule='/pemodelan_manual',
-                           title='Pemodelan Manual')
+    return render_template("manual1.html", shape=data.dataset_df.shape, df=data.dataset_df, rule='/pemodelan_pertahap',
+                           title='Pemodelan Per-tahapan')
 
 
 def demo_1send():
     if request.method == "POST":
-        col = []
+        cols = []
         if (request.form.get('age', False) != False):
-            col.append('age')
+            cols.append('age')
         if (request.form.get('bp', False) != False):
-            col.append('bp')
+            cols.append('bp')
         if (request.form.get('sg', False) != False):
-            col.append('sg')
+            cols.append('sg')
         if (request.form.get('al', False) != False):
-            col.append('al')
+            cols.append('al')
         if (request.form.get('su', False) != False):
-            col.append('su')
+            cols.append('su')
         if (request.form.get('bgr', False) != False):
-            col.append('bgr')
+            cols.append('bgr')
         if (request.form.get('bu', False) != False):
-            col.append('bu')
+            cols.append('bu')
         if (request.form.get('sc', False) != False):
-            col.append('sc')
+            cols.append('sc')
         if (request.form.get('sod', False) != False):
-            col.append('sod')
+            cols.append('sod')
         if (request.form.get('pot', False) != False):
-            col.append('pot')
+            cols.append('pot')
         if (request.form.get('hemo', False) != False):
-            col.append('hemo')
+            cols.append('hemo')
         if (request.form.get('pcv', False) != False):
-            col.append('pcv')
+            cols.append('pcv')
         if (request.form.get('wbcc', False) != False):
-            col.append('wbcc')
+            cols.append('wbcc')
         if (request.form.get('rbcc', False) != False):
-            col.append('rbcc')
+            cols.append('rbcc')
 
         # MULAI NOMINAL
         if (request.form.get('rbc', False) != False):
-            col.append('rbc')
+            cols.append('rbc')
         if (request.form.get('pc', False) != False):
-            col.append('pc')
+            cols.append('pc')
         if (request.form.get('pcc', False) != False):
-            col.append('pcc')
+            cols.append('pcc')
         if (request.form.get('ba', False) != False):
-            col.append('ba')
+            cols.append('ba')
         if (request.form.get('htn', False) != False):
-            col.append('htn')
+            cols.append('htn')
         if (request.form.get('dm', False) != False):
-            col.append('dm')
+            cols.append('dm')
         if (request.form.get('cad', False) != False):
-            col.append('cad')
+            cols.append('cad')
         if (request.form.get('appet', False) != False):
-            col.append('appet')
+            cols.append('appet')
         if (request.form.get('pe', False) != False):
-            col.append('pe')
+            cols.append('pe')
         if (request.form.get('ane', False) != False):
-            col.append('ane')
+            cols.append('ane')
 
-        tahapan = request.form['atribut']
-        if tahapan == "cust":
-            tahap = "Atribut pilihan: " + ', '.join(col)
-        elif tahapan == "be1":
-            tahap = "Atribut hasil Backward Elimination, α = 0.1: " + ', '.join(col)
-        elif tahapan == "be2":
-            tahap = "Atribut hasil Backward Elimination, α = 0.05: " + ', '.join(col)
-        elif tahapan == "all":
-            tahap = "Semua atribut"
+        atribut_awal = 'Atribut awal: ' + ', '.join(cols)
 
-    return col, tahap
+        data.dict_tahap_demo = {}
+        data.cols = []
+        data.cols = cols
+
+    return cols, atribut_awal
 
 
 # PENANGANAN OUTLIER
-@app.route('/manual2')
+@app.route('/tahap2')
 def render_2():
     data.dataset_df, shape = demo_2send()
     return render_template("manual2.html", terbaik=data.terbaik, df=data.dataset_df,
-                           shape=shape, rule='/pemodelan_manual', title='Pemodelan Manual')
+                           shape=shape, rule='/pemodelan_manual', title='Pemodelan Per-tahapan')
 
 
 def demo_2send():
@@ -733,11 +729,11 @@ def demo_2send():
 
 
 # NOMINAL -> NUMERIK
-@app.route('/manual3')
+@app.route('/tahap3')
 def render_3():
     data.dataset_df = demo_3send()
     return render_template("manual3.html", terbaik=data.terbaik, df=data.dataset_df,
-                           shape=data.dataset_df.shape, rule='/pemodelan_manual', title='Pemodelan Manual')
+                           shape=data.dataset_df.shape, rule='/pemodelan_manual', title='Pemodelan Per-tahapan')
 
 
 def demo_3send():
@@ -750,7 +746,7 @@ def demo_3send():
     cut_df_class = data.dataset_df["class"]
     cut_df = pd.concat([cut_df_id, cut_df_col, cut_df_class], axis=1)
 
-    encoding_df = encoding(cut_df, all_nominal=col_nominal)
+    encoding_df = encoding(cut_df, cols=col_nominal)
     return encoding_df
 
 
@@ -758,7 +754,7 @@ def demo_3send():
 
 
 # MISSING HANDLING
-@app.route('/manual4')
+@app.route('/tahap4')
 def render_4():
     data.dataset_df = demo_4send()
     return render_template("manual4.html", terbaik=data.terbaik, df=data.dataset_df, shape=data.dataset_df.shape,
@@ -767,7 +763,7 @@ def render_4():
 
 def demo_4send():
     data.dict_tahap_demo['4'] = "Penanganan Missing Value"
-    missing_handling_df = missing_handling(data.dataset_df, all_col=data.cols)
+    missing_handling_df = missing_handling(data.dataset_df, cols=data.cols)
     return missing_handling_df
 
 
@@ -775,10 +771,10 @@ def demo_4send():
 
 
 # NORMALISASI
-@app.route('/manual5')
+@app.route('/tahap5')
 def render_5():
     data.dict_tahap_demo['5'] = "Normalisasi"
-    normalizing_df = normalizing(data.dataset_df, all_col=data.cols)
+    normalizing_df = normalizing(data.dataset_df, cols=data.cols)
     data.dataset_df = normalizing_df
     return render_template("manual5.html", terbaik=data.terbaik, df=data.dataset_df, shape=data.dataset_df.shape,
                            rule='/pemodelan_manual', title='Pemodelan Manual')

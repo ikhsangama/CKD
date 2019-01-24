@@ -444,7 +444,7 @@ def target():
 @app.route('/pemodelan_manual')
 def pemodelan_manual():
     rule = request.url_rule.rule
-    return render_template("pemodelan_manual.html", rule=rule)
+    return render_template("pemodelan_pertahap.html", rule=rule)
 
 
 @app.route('/manual1', methods=['GET', 'POST'])

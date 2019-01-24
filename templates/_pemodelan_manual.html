@@ -13,19 +13,19 @@
                 </h3></blockquote>
 
                 <label>
-                    <input id="custom" name="atribut" type="radio" value="0"/>
+                    <input id="custom" name="atribut" type="radio" value="cust"/>
                     <span class="black-text">Custom</span>
                 </label>
                 <label>
-                    <input id="back1" name="atribut" type="radio" checked value="1"/>
+                    <input id="back1" name="atribut" type="radio" checked value="be1"/>
                     <span class="black-text">Backward Elimination, α = 0.1</span>
                 </label>
                 <label>
-                    <input id="back2" name="atribut" type="radio" value="2"/>
+                    <input id="back2" name="atribut" type="radio" value="be2"/>
                     <span class="black-text">Backward Elimination, α = 0.05</span>
                 </label>
                 <label>
-                    <input id="all" name="atribut" type="radio" value="3"/>
+                    <input id="all" name="atribut" type="radio" value="all"/>
                     <span class="black-text">Semua Atribut</span>
                 </label>
 
@@ -56,7 +56,7 @@
                             <td>2</td>
                             <td>
                                 <label>
-                                    <input class="cust0" type="checkbox" name="bp"/>
+                                    <input class="cust0 backed1" type="checkbox" name="bp" checked/>
                                     <span>bp</span>
                                 </label>
                             </td>
@@ -66,7 +66,7 @@
                             <td>3</td>
                             <td>
                                 <label>
-                                    <input class="cust0 backed1" type="checkbox" name="sg" checked/>
+                                    <input class="cust0 backed1 backed2" type="checkbox" name="sg" checked/>
                                     <span>sg</span>
                                 </label>
                             </td>
@@ -76,7 +76,7 @@
                             <td>4</td>
                             <td>
                                 <label>
-                                    <input class="cust0 backed1" type="checkbox" name="al" checked/>
+                                    <input class="cust0 backed1 backed2" type="checkbox" name="al" checked/>
                                     <span>al</span>
                                 </label>
                             </td>
@@ -96,7 +96,7 @@
                             <td>6</td>
                             <td>
                                 <label>
-                                    <input class="cust0" type="checkbox" name="bgr"/>
+                                    <input class="cust0 backed1" type="checkbox" name="bgr" checked/>
                                     <span>bgr</span>
                                 </label>
                             </td>
@@ -106,7 +106,7 @@
                             <td>7</td>
                             <td>
                                 <label>
-                                    <input class="cust0 backed1" type="checkbox" name="bu" checked/>
+                                    <input class="cust0 backed1 backed2" type="checkbox" name="bu" checked/>
                                     <span>bu</span>
                                 </label>
                             </td>
@@ -116,7 +116,7 @@
                             <td>8</td>
                             <td>
                                 <label>
-                                    <input class="cust0 backed1" type="checkbox" name="sc" checked/>
+                                    <input class="cust0 backed1 backed2" type="checkbox" name="sc" checked/>
                                     <span>sc</span>
                                 </label>
                             </td>
@@ -141,7 +141,7 @@
                             <td>9</td>
                             <td>
                                 <label>
-                                    <input class="cust0 backed1" type="checkbox" name="sod" checked/>
+                                    <input class="cust0 backed1 backed2" type="checkbox" name="sod" checked/>
                                     <span>sod</span>
                                 </label>
                             </td>
@@ -161,7 +161,7 @@
                             <td>11</td>
                             <td>
                                 <label>
-                                    <input class="cust0 backed1" type="checkbox" name="hemo" checked/>
+                                    <input class="cust0 backed1 backed2" type="checkbox" name="hemo" checked/>
                                     <span>hemo</span>
                                 </label>
                             </td>
@@ -201,7 +201,7 @@
                             <td>15</td>
                             <td>
                                 <label>
-                                    <input class="cust0" type="checkbox" name="rbc"/>
+                                    <input class="cust0 backed1 backed2" type="checkbox" name="rbc" checked/>
                                     <span>rbc</span>
                                 </label>
                             </td>
@@ -255,7 +255,7 @@
                             <td>19</td>
                             <td>
                                 <label>
-                                    <input class="cust0 backed1" type="checkbox" name="htn" checked/>
+                                    <input class="cust0 backed1 backed2" type="checkbox" name="htn" checked/>
                                     <span>htn</span>
                                 </label>
                             </td>
@@ -265,7 +265,7 @@
                             <td>20</td>
                             <td>
                                 <label>
-                                    <input class="cust0 backed1" type="checkbox" name="dm" checked/>
+                                    <input class="cust0 backed1 backed2" type="checkbox" name="dm" checked/>
                                     <span>dm</span>
                                 </label>
                             </td>
@@ -275,7 +275,7 @@
                             <td>21</td>
                             <td>
                                 <label>
-                                    <input class="cust0 backed1" type="checkbox" name="cad" checked/>
+                                    <input class="cust0" type="checkbox" name="cad"/>
                                     <span>cad</span>
                                 </label>
                             </td>
@@ -285,7 +285,7 @@
                             <td>22</td>
                             <td>
                                 <label>
-                                    <input class="cust0 backed1" type="checkbox" name="appet" checked/>
+                                    <input class="cust0 backed1 backed2" type="checkbox" name="appet" checked/>
                                     <span>appet</span>
                                 </label>
                             </td>
@@ -335,6 +335,15 @@
         $('#back1').click(function () {
             $("input.cust0").prop('checked', !this.checked);
             $("input.backed1").prop('checked', this.checked);
+        });
+
+        $('#back2').click(function () {
+            $("input.cust0").prop('checked', !this.checked);
+            $("input.backed2").prop('checked', this.checked);
+        });
+
+        $('#all').click(function () {
+            $("input.cust0").prop('checked', this.checked);
         });
         $("input[type='checkbox']").click(function () {
             console.log('ganti');
