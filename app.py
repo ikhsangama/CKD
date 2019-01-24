@@ -200,6 +200,8 @@ import statsmodels.formula.api as sm
 
 
 def backward_elimination(splitdf_x, splitdf_y, sl=0.05):
+    print("splity")
+    print(splitdf_y)
     sl_ = sl
     copy_df = splitdf_x.copy()
     reg_ols = sm.OLS(endog=splitdf_y, exog=copy_df).fit()
@@ -598,8 +600,6 @@ def langsung1():
         cut_df_class = data.dataset_df["class"]
         cut_df = pd.concat([cut_df_id, cut_df_col, cut_df_class], axis=1)
         np.set_printoptions(threshold=np.nan)
-        print("cut")
-        print(cut_df)
 
         start_time = time.time()
         confusion, akurasi, sensitifity, specificity = knn_kfold(cut_df, arr_akurasi=1, kNN=data.k_temp)
@@ -740,6 +740,7 @@ def demo_3send():
     data.dict_tahap_demo['3'] = "Transformasi Nominal Menjadi Numerik"
     daftar_col_nominal = ["rbc", "pc", "pcc", "ba", "htn", "dm", "cad", "appet", "pe", "ane"]  # untuk transformasi
     col_nominal = [i for i in data.cols if i in daftar_col_nominal]
+    col_nominal.append("class")
 
     cut_df_id = data.dataset_df["id"]
     cut_df_col = data.dataset_df[data.cols]
@@ -791,9 +792,34 @@ def render_6():
     data.dict_tahap_demo['6'] = "Prediksi kNN, k= " + str(data.k_temp)
 
     cut_df_id = data.dataset_df["id"]
-    cut_df_col = data.dataset_df[data.cols]
+    cut_df_cols = data.dataset_df[data.cols]
     cut_df_class = data.dataset_df["class"]
-    cut_df = pd.concat([cut_df_col, cut_df_class], axis=1)
+    cut_df = pd.concat([cut_df_id, cut_df_cols, cut_df_class], axis=1)
+    data.dataset_df
+    # TAHAP BACKWARD
+
+    tahapan = request.form.get('atribut', None)
+    if tahapan != None:
+        if tahapan == "be_1":
+            sl = 0.1
+        elif tahapan == "be_05":
+            sl = 0.05
+
+        backwarding_df = backward_elimination(cut_df_cols, cut_df_class, sl=sl)
+        backward_df = pd.concat([cut_df_id, backwarding_df], axis=1)
+        data.cols = list(backward_df)
+        data.cols.remove('id')
+        data.cols.remove('class')
+
+        if tahapan == "be_1":
+            atribut_akhir = "Atribut hasil Backward Elimination, α = 0.1: " + ', '.join(data.cols)
+        elif tahapan == "be_05":
+            atribut_akhir = "Atribut hasil Backward Elimination, α = 0.05: " + ', '.join(data.cols)
+
+        data.dict_tahap_demo['6'] = atribut_akhir
+        data.dataset_df = backward_df
+        cut_df = data.dataset_df
+    # .TAHAP BACKWARD
 
     start_time = time.time()
     confusion, akurasi, sensitifity, specificity = knn_kfold(cut_df, arr_akurasi=1, kNN=data.k_temp)
